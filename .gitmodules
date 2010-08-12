@@ -1,0 +1,6 @@
+[submodule "zshfiles"]
+	path = zshfiles
+	url = git@github.com:kalamay/zshfiles.git
+[submodule "vimfiles"]
+	path = vimfiles
+	url = git@github.com:kalamay/vimfiles.git
