@@ -1,0 +1,20 @@
+Background: 212935
+Text: EEE9D3
+Bold Text: ECE6CB
+Selection: 30515C
+Black: 0E1014
+Red: D63830
+Green: 859900
+Yellow: B38900
+Blue: 2F8BD5
+Magenta: CD3C85
+Cyan: 42A0A0
+White: 5B6573
+Bright Black: 151A22
+Bright Red: C64E10
+Bright Green: 3F6A00
+Bright Yellow: E7B121
+Bright Blue: 5889B3
+Bright Magenta: 873C8A
+Bright Cyan: 2297B1
+Bright White: ADB1B6
