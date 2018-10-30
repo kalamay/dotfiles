@@ -21,22 +21,16 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeShowLineNumbers=1
 nnoremap <silent> <C-n> :edit .<CR>
 
-Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }
-let g:ctrlp_max_depth = 8
-let g:ctrlp_by_filename = 0
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
-let g:ctrlp_working_path_mode = 0
-nnoremap <C-P> :CtrlP<CR>
-
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 nnoremap <Leader>u :UndotreeToggle<CR>
 
 "Plug 'beyondmarc/opengl.vim', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] }
 Plug 'tikhomirov/vim-glsl', { 'for': ['glsl'] }
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-Plug 'andrewrk/zig.vim', { 'for': ['zig'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'digitaltoad/vim-pug', { 'for': ['pug'] }
+
+Plug 'dag/vim-fish'
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[
@@ -50,6 +44,20 @@ for path in s:clang_library_paths
 		break
 	endif
 endfor
+
+function! FzyCommand(choice_command, vim_command)
+	try
+		let output = system(a:choice_command . " | fzy ")
+	catch /Vim:Interrupt/
+		" Swallow errors from ^C, allow redraw! below
+	endtry
+	redraw!
+	if v:shell_error == 0 && !empty(output)
+		exec a:vim_command . ' ' . output
+	endif
+endfunction
+
+nnoremap <C-P> :call FzyCommand("pls", ":e")<CR>
 
 try
 	set completeopt=menuone,noinsert
@@ -147,7 +155,9 @@ if has('gui_running')
 	set guioptions=egma
 	set guitablabel=%N\ %f
 	set guioptions-=T
-	colorscheme one
+	set nolist
+	set number
+	colorscheme srcery
 	nnoremap <D-S-Right> :tabnext<CR>
 	nnoremap <D-S-Left> :tabprev<CR>
 else
