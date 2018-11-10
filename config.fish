@@ -42,15 +42,15 @@ end
 
 alias y2j="ruby -ryaml -rjson -e 'YAML.load_stream(ARGF).each { |d| puts JSON.pretty_generate(d) }'"
 alias cc-defs="cc -dM -E -x c /dev/null"
-alias pls='git ls-files ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
+alias pls='git ls-files -co --exclude-standard ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
 
 alias tsh="tmk shell ~"
-alias tls="tmux ls ^/dev/null"
+alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_current_path} #{?session_attached,[attached],}' ^/dev/null"
 
 function tm -d "Create or attach to a session directory" -a name
 	set -l dir "$PWD"
 	if test -z "$name"
-		if not set name (tls -F '#{session_name}' | fzy)
+		if not set name (tls -F '#S' | fzy)
 			return 1
 		end
 	else if test -d "$name"
