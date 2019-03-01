@@ -112,13 +112,6 @@ set history=300
 nnoremap ' `
 nnoremap ` '
 
-try
-	set switchbuf=useopen,vsplit
-catch
-	set switchbuf=useopen
-endtry
-set splitright
-
 set cursorline
 set scrolloff=2
 set mouse=a
