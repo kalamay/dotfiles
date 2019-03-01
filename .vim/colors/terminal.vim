@@ -98,6 +98,11 @@ hi MatchParen     ctermfg=9 ctermbg=none cterm=bold
 hi link lCursor Cursor
 hi link vimGroup Constant
 
+hi xmlTag ctermfg=7
+hi xmlTagName ctermfg=5
+hi xmlAttrib ctermfg=4
+hi link xmlEndTag xmlTag
+
 "}}}
 " Conditional highlighting "{{{
 " ---------------------------------------------------------------------
