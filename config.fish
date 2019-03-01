@@ -69,6 +69,10 @@ function tmk -a name dir
 	end
 end
 
+function api
+	curl -s $argv | jq
+end
+
 if test -z $TMUX
 	tmux new-session -A -s shell -c $HOME
 end
