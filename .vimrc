@@ -120,7 +120,7 @@ catch
 endtry
 set splitright
 
-set nocursorline
+set cursorline
 set scrolloff=2
 set mouse=a
 
@@ -190,8 +190,8 @@ set viminfo='1000,f1,\"500,:100,/100
 set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,tabpages,winsize,winpos
 set wildignore+=*.o,*.obj,*.dSYM,*.pyc,.git,.hg,.svn,.DS_Store,tmp,node_modules
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 set autoindent
 set smartindent
