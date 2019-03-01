@@ -28,8 +28,7 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 Plug 'tikhomirov/vim-glsl', { 'for': ['glsl'] }
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'digitaltoad/vim-pug', { 'for': ['pug'] }
-
+Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
 Plug 'dag/vim-fish'
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
