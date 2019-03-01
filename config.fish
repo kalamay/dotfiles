@@ -73,6 +73,83 @@ function api
 	curl -s $argv | jq
 end
 
+function conanit -a dir
+	if test -z "$dir"
+		echo "directory not specified"
+		return 1
+	end
+
+	if not mkdir -p $dir
+		return 1
+	end
+
+	set -l name (basename $dir)
+
+	set -l CMakeLists "$dir/CMakeLists.txt"
+	if not test -e "$CMakeLists"
+		echo "cmake_minimum_required(VERSION 2.8.12)" > "$CMakeLists"
+		echo "project($name)" >> "$CMakeLists"
+		echo >> "$CMakeLists"
+		echo "add_definitions(\"-std=c++17\")" >> "$CMakeLists"
+		echo >> "$CMakeLists"
+		echo "include(\${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)" >> "$CMakeLists"
+		echo "conan_basic_setup()" >> "$CMakeLists"
+		echo >> "$CMakeLists"
+		echo "add_executable($name main.cc)" >> "$CMakeLists"
+		echo "target_link_libraries($name \${CONAN_LIBS})" >> "$CMakeLists"
+	end
+
+	set -l Makefile "$dir/Makefile"
+	if not test -e "$Makefile"
+		echo "all: build/Makefile" > "$Makefile"
+		echo "	cd build && cmake --build ." >> "$Makefile"
+		echo >> "$Makefile"
+		echo "build/Makefile: build/conanbuildinfo.cmake" >> "$Makefile"
+		echo "	cd build && cmake .. -DCMAKE_BUILD_MODE=Release" >> "$Makefile"
+		echo >> "$Makefile"
+		echo "build/conanbuildinfo.cmake: | build" >> "$Makefile"
+		echo "	cd build && conan install .. --build=missing" >> "$Makefile"
+		echo >> "$Makefile"
+		echo "build:" >> "$Makefile"
+		echo "	mkdir build" >> "$Makefile"
+		echo >> "$Makefile"
+		echo "clean:" >> "$Makefile"
+		echo "	rm -rf build" >> "$Makefile"
+		echo >> "$Makefile"
+		echo ".PHONY: all clean" >> "$Makefile"
+	end
+
+	set -l conanfile "$dir/conanfile.txt"
+	if not test -e "$conanfile"
+		echo "[requires]" > "$conanfile"
+		echo "boost/1.69.0@conan/stable" >> "$conanfile"
+		echo >> "$conanfile"
+		echo "[generators]" >> "$conanfile"
+		echo "cmake" >> "$conanfile"
+	end
+
+	set -l main "$dir/main.cc"
+	if not test -e "$main"
+		echo "#include <iostream>" > "$main"
+		echo >> "$main"
+		echo "int main(int argc, char** argv)" >> "$main"
+		echo "{" >> "$main"
+		echo "	std::cout << \"hello\" << std::endl;" >> "$main"
+		echo "	return 0;" >> "$main"
+		echo "}" >> "$main"
+	end
+
+	set -l gitignore "$dir/.gitignore"
+	if not test -e "$gitignore"
+		echo ".DS_Store" > "$gitignore"
+		echo "build" >> "$gitignore"
+	end
+
+	if not test -d "$dir/.git"
+		git init "$dir"
+	end
+end
+
 if test -z $TMUX
 	tmux new-session -A -s shell -c $HOME
 end
