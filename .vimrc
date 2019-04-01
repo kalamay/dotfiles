@@ -29,7 +29,8 @@ Plug 'tikhomirov/vim-glsl', { 'for': ['glsl'] }
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
-Plug 'dag/vim-fish'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[

@@ -1,1 +1,1 @@
-/Users/jeremy/projects/dotfiles/.vim
+/Users/jeremy.larkin/dotfiles/.vim

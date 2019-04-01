@@ -118,7 +118,7 @@ if &bg == "dark"
 	hi ErrorMsg ctermfg=0 ctermbg=1 cterm=bold
 	hi LineNr ctermfg=0 ctermbg=none cterm=none
 	hi VertSplit ctermbg=8 ctermfg=7 cterm=none
-	hi Folded ctermfg=0 ctermbg=7 cterm=none
+	hi Folded ctermfg=7 ctermbg=0 cterm=none
 	hi DiffAdd ctermfg=2 ctermbg=7
 	hi DiffChange ctermfg=3 ctermbg=7
 	hi DiffDelete ctermfg=2 ctermbg=7

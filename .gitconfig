@@ -1,7 +1,3 @@
-[user]
-	name = Jeremy Larkin
-	email = jeremylarkin@gmail.com
-
 [core]
 	quotepath = false
 	excludesfile = /Users/jeremy/.gitignore_global

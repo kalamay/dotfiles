@@ -4,3 +4,4 @@ setlocal shiftwidth=4
 setlocal smarttab
 setlocal noexpandtab
 setlocal nosmartindent
+setlocal expandtab
