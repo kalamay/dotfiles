@@ -12,6 +12,8 @@ cat > "/tmp/.gitconfig" <<EOF
 	path = $DIR/.gitconfig
 EOF
 
+echo "export PATH=$DIR/bin:\"\$PATH\""
+
 mv /tmp/.gitconfig "$HOME/.gitconfig"
 
 FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc"

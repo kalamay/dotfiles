@@ -11,7 +11,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegehxbxgxcxd
 export LS_COLORS='di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
 export EDITOR=vim
-export PATH=$HOME/opt/sbin:$HOME/opt/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/sbin:$PATH
 
 # }}}
 # completions {{{
@@ -200,13 +200,13 @@ zle -N self-insert url-quote-magic
 bindkey "^r" history-incremental-search-backward
 
 zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
 if [ -z $TMUX ]; then
-	zstyle ':vcs_info:*' actionformats "%{$fg[red]%}%b %{$fg[green]%}%a%{$reset_color%}"
-	zstyle ':vcs_info:*' formats "%{$fg[green]%}%b%{$reset_color%}"
+	zstyle ':vcs_info:*' actionformats "%{$fg[red]%}%b %{$fg[green]%}%a%{$reset_color%} %{$fg[magenta]%}%u%c"
+	zstyle ':vcs_info:*' formats "%{$fg[green]%}%b%{$reset_color%} %{$fg[magenta]%}%u%c"
 else
-	zstyle ':vcs_info:*' actionformats "%{$fg[red]%}%b %{$fg_bold[blue]%}%a%{$reset_color%}"
-	zstyle ':vcs_info:*' formats "%{$fg[magenta]%}%u%c %%{$fg_bold[blue]%}%b%{$reset_color%}"
-	zstyle ':vcs_info:git:*' check-for-changes true
+	zstyle ':vcs_info:*' actionformats "%{$fg[blue]%}%u%c %{$fg[red]%}%b %{$fg[white]%}%a%{$reset_color%}"
+	zstyle ':vcs_info:*' formats "%{$fg[blue]%}%u%c %{$fg[white]%}%b%{$reset_color%}"
 fi
 
 function precmd {
@@ -220,16 +220,16 @@ function precmd {
 		echo -ne "\e]2;$PWD\a"
 		print -rP "%{$fg[cyan]%}[%*] %{$fg[white]%}%~ ${vcs_info_msg_0_}"
 	else
-		RPROMPT="${vcs_info_msg_0_:- }"
+		RPROMPT=$vcs_info_msg_0_
 	fi
 	PROMPT=$VI_INSERT_PROMPT
 }
 
 # }}}
 
-if [ -e $HOME/.cargo/env ]; then
-	source $HOME/.cargo/env
-fi
+#if [ -e $HOME/.cargo/env ]; then
+	#source $HOME/.cargo/env
+#fi
 
 if [ -z $TMUX ]; then
 	tmux new-session -A -s shell -c $HOME

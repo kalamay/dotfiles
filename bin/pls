@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if ! git ls-files -co --exclude-standard 2>/dev/null; then
+	find . \( -type d \( -name "*.dSYM" -or -name "__pycache__" \) -or -name "*.pyc" \) -prune -o -type f -maxdepth 4 -print 2>/dev/null
+fi
