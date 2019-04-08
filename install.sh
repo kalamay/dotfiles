@@ -16,7 +16,7 @@ echo "export PATH=$DIR/bin:\"\$PATH\""
 
 mv /tmp/.gitconfig "$HOME/.gitconfig"
 
-FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc"
+FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
 for FILE in $FILES; do
 	ln -sf "$DIR/$FILE" "$HOME/$FILE"
 done
