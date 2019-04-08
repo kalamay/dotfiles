@@ -87,6 +87,13 @@ alias robo="robo --config $ROBO_CONFIG"
 alias tsh="tmk shell ~"
 alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_current_path} #{?session_attached,[attached],}' 2>/dev/null"
 
+function chpwd() {
+	emulate -L zsh
+	if [ -n $TMUX ]; then
+		tmux refresh-client -S
+	fi
+}
+
 # usage: tm NAME/DIR
 function tm {
 	local dir="$PWD"
