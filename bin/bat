@@ -1,0 +1,40 @@
+#! /usr/bin/env lua
+
+local io = require("io")
+local pmset = io.popen("pmset -g batt")
+local conn = pmset:read("*l")
+local batt = pmset:read("*l")
+pmset:close()
+
+local ac = conn:match("'AC Power'")
+if ac then
+	io.stdout:write("⌁")
+end
+
+local pct, tail = batt:match("(%d+%%);[^;]+;%s+(.+)")
+--local pct = tonumber(pct)
+local hr, min = tail:match("^(%d+):(%d+)")
+
+io.stdout:write(pct)
+
+--if pct < 10 then
+--	io.stdout:write("\27[31m")
+--else
+--	io.stdout:write("\27[37m")
+--end
+
+--local pcts = { "▁","▂","▃","▄","▅","▆","▇","█" }
+--local i = math.min(math.floor(pct/(100/#pcts)), #pcts-1)
+--io.stdout:write("\27[40m")
+--io.stdout:write(pcts[i+1])
+
+if hr and (tonumber(hr) > 0 or tonumber(min) > 0) then
+--	io.stdout:write("\27[0m")
+	io.stdout:write(" ")
+	io.stdout:write(hr)
+	io.stdout:write(":")
+	io.stdout:write(min)
+end
+--io.stdout:write("\27[0m\n")
+io.stdout:write("\n")
+

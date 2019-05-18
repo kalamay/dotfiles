@@ -2,19 +2,20 @@
 
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-read -p "Git User Email: " gitemail
-cat > "/tmp/.gitconfig" <<EOF
+read -p "Git User Email: " git_email
+cat > "$HOME/.gitconfig" <<EOF
 [user]
 	name = Jeremy Larkin
-	email = $gitemail
+	email = $git_email
 
 [include]
 	path = $DIR/.gitconfig
 EOF
 
-echo "export PATH=$DIR/bin:\"\$PATH\""
-
-mv /tmp/.gitconfig "$HOME/.gitconfig"
+mkdir -p "$HOME/opt/bin"
+for FILE in $(ls $DIR/bin); do
+	ln -sf "$DIR/bin/$FILE" "$HOME/opt/bin/$FILE"
+done
 
 FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
 for FILE in $FILES; do
