@@ -89,7 +89,7 @@ alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_cur
 function chpwd() {
 	emulate -L zsh
 	if [ -n $TMUX ]; then
-		tmux refresh-client -S
+		tmux refresh-client -S 2> /dev/null
 	fi
 }
 
@@ -115,7 +115,7 @@ function tm {
 }
 
 function _tm {
-	_alternative "session: :($(tmux ls -F '#S'))" "directory: :_dirs"
+	_alternative "session: :($(tmux ls -F '#S' 2> /dev/null))" "directory: :_dirs"
 }
 
 compdef _tm tm
@@ -131,7 +131,7 @@ function tmk {
 }
 
 function _tmk {
-	_arguments "1: :($(tmux ls -F '#S'))" "2: :_dirs"
+	_arguments "1: :($(tmux ls -F '#S' 2> /dev/null))" "2: :_dirs"
 }
 
 compdef _tmk tmk
