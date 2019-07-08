@@ -78,7 +78,6 @@ compinit -i -d "$HOME/.zsh_compdump"
 
 alias la='ls -lah'
 alias ll='ls -lh'
-alias lt='tree | less'
 alias grep="grep --color"
 alias pstree="pstree -g 3"
 alias clang-defs="clang -dM -E -x c /dev/null"
@@ -92,6 +91,10 @@ function chpwd() {
 	if [ -n $TMUX ]; then
 		tmux refresh-client -S
 	fi
+}
+
+function lt {
+	tree -C "$@" | less -R
 }
 
 # usage: tm NAME/DIR
