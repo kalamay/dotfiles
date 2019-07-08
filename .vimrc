@@ -29,6 +29,7 @@ Plug 'tikhomirov/vim-glsl', { 'for': ['glsl'] }
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -95,9 +96,9 @@ endif
 au BufWritePre /Volumes/* setlocal noundofile
 
 augroup WinActive
-    autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
+	autocmd!
+	autocmd WinEnter * set cul
+	autocmd WinLeave * set nocul
 augroup END
 
 set encoding=utf-8
@@ -252,7 +253,6 @@ function! <SID>SynStack()
 	if firstlink != lastlink
 		let no_overflow= 0
 		let curlink    = firstlink
-		"   call Decho("loop#".no_overflow.": hilink<".hilink.">")
 		while curlink != lastlink && no_overflow < 10
 			let no_overflow = no_overflow + 1
 			let nxtlink     = substitute(@a,'^.*\<'.curlink.'\s\+xxx links to \(\a\+\).*$','\1','')
@@ -261,11 +261,9 @@ function! <SID>SynStack()
 				let hilink = hilink ."->". nxtlink
 				break
 			endif
-			"    call Decho("loop#".no_overflow.": curlink<".curlink."> nxtlink<".nxtlink."> hilink<".hilink.">")
 			let hilink      = hilink ."->". nxtlink
 			let curlink     = nxtlink
 		endwhile
-		"   call Decho("endloop: hilink<".hilink.">")
 	endif
 
 	if v:version > 701 || ( v:version == 701 && has("patch215"))
