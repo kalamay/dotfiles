@@ -45,23 +45,35 @@ alias cc-defs="cc -dM -E -x c /dev/null"
 alias pls='git ls-files -co --exclude-standard ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
 
 alias tsh="tmk shell ~"
-alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_current_path} #{?session_attached,[attached],}' ^/dev/null"
+alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_current_path} #{?session_attached,[attached],}' 2>/dev/null"
 
 function tm -d "Create or attach to a session directory" -a name
 	set -l dir "$PWD"
 	if test -z "$name"
-		if not set name (tls -F '#S' | fzy)
-			return 1
-		end
-	else if test -d "$name"
+		echo "usage: tm NAME/DIR"
+		return 1
+	end
+	if test -d "$name"
 		set dir (pushd "$name"; pwd; popd)
 		set name (basename $dir)
 	end
 	tmk $name $dir
 end
 
+function __complete_tm
+	set -l sessions (tmux ls -F '#S' 2> /dev/null)
+	printf "%s\tSession\n" $sessions
+
+	set comp (commandline -ct)
+	set -l dirs (complete -C"nonexistentcommandooheehoohaahaahdingdongwallawallabingbang $comp" | string match -r '.*/$')
+	printf "%s\tDirectory\n" $dirs
+end
+
+complete -c tm -x
+complete -c tm -k -a '(__complete_tm)'
+
 function tmk -a name dir
-	tmux new-session -d -s $name -c "$dir" ^/dev/null
+	tmux new-session -d -s "$name" -c "$dir" 2>/dev/null
 	if test -z $TMUX
 		tmux attach-session -t $name
 	else
