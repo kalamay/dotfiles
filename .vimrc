@@ -30,8 +30,8 @@ Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
-
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'dag/vim-fish', { 'for': ['fish'] }
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[
