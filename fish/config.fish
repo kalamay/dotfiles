@@ -50,6 +50,10 @@ alias y2j="ruby -ryaml -rjson -e 'YAML.load_stream(ARGF).each { |d| puts JSON.pr
 alias cc-defs="cc -dM -E -x c /dev/null"
 alias pls='git ls-files -co --exclude-standard ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
 
+function lt
+	tree -C $argv| less -R
+end
+
 alias tsh="tmk shell ~"
 alias tls="tmux ls -F '#S: created #{t:session_created} in #{s|$HOME|~|:pane_current_path} #{?session_attached,[attached],}' 2>/dev/null"
 
