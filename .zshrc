@@ -11,7 +11,8 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegehxbxgxcxd
 export LS_COLORS='di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
 export EDITOR=vim
-export PATH=$HOME/opt/bin:/usr/local/sbin:$HOME/.cargo/bin::$PATH:$GOPATH/bin
+export PATH=$HOME/opt/bin:/usr/local/sbin:$HOME/.cargo/bin:$PATH:$GOPATH/bin
+export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
 # }}}
 # completions {{{
@@ -248,4 +249,5 @@ export NVM_DIR="$HOME/.nvm"
 if [ -z $TMUX ]; then
 	tmux new-session -A -s shell -c $HOME
 fi
+
 
