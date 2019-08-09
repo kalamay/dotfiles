@@ -19,12 +19,15 @@ done
 
 FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
 for FILE in $FILES; do
-	ln -sf "$DIR/$FILE" "$HOME/$FILE"
+	rm -f "$HOME/$FILE"
+	ln -s "$DIR/$FILE" "$HOME/$FILE"
 done
 
 mkdir -p "$HOME/.config/fish"
 for FILE in $(ls $DIR/fish); do
-	ln -sf "$DIR/fish/$FILE" "$HOME/.config/fish/$FILE"
+	rm -f "$HOME/.config/fish/$FILE"
+	ln -s "$DIR/fish/$FILE" "$HOME/.config/fish/$FILE"
 done
 
-ln -sf "$DIR/alacritty.yml" "$HOME/.config/alacritty.yml"
+rm -f "$HOME/.config/alacritty.yml"
+ln -s "$DIR/alacritty.yml" "$HOME/.config/alacritty.yml"
