@@ -1,3 +1,7 @@
+set -x GOPATH $HOME/dev
+set -x ROBO_CONFIG $GOPATH/src/github.com/segmentio/robofiles/development/robo.yml
+set -x SEGMENT_TEAM platform
+set -x SEGMENT_USER jeremy.larkin@segment.com
 set -x PATH $HOME/opt/bin /usr/local/sbin $HOME/.cargo/bin /usr/local/bin /usr/local/lib/ruby/gems/2.5.0/bin $PATH $GOPATH/bin
 set -x LSCOLORS GxFxCxDxBxegehxbxgxcxd
 set -x LS_COLORS 'di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
@@ -5,13 +9,13 @@ set -x EDITOR vim
 
 function fish_prompt
 	# if the last command failed, print the status code
-#	set -l last_command_status $status
-#	if test $last_command_status -ne 0
-#		set_color green
-#		echo -n "exit: "
-#		set_color red
-#		echo "$last_command_status"
-#	end
+	set -l last_command_status $status
+	if test $last_command_status -ne 0
+		set_color green
+		echo -n "exit: "
+		set_color red
+		echo "$last_command_status"
+	end
 
 	# when not in tmux, print the current status information
 	if test -z $TMUX
@@ -23,13 +27,14 @@ function fish_prompt
 	end
 
 	switch $fish_bind_mode
-        case default
-			set_color red --bold
-        case insert
-			set_color green --bold
-        case visual
-			set_color blue --bold
-    end
+	case default
+		set_color red --bold
+	case insert
+		set_color green --bold
+	case visual
+		set_color blue --bold
+	end
+
 	echo -n "% "
 	set_color normal
 end
@@ -164,5 +169,31 @@ end
 
 if test -z $TMUX
 	tmux new-session -A -s shell -c $HOME
+else
+	fish_vi_key_bindings
+
+	set fish_color_normal normal # the default color
+	set fish_color_command ffffff --bold # the color for commands
+	set fish_color_quote green # the color for quoted blocks of text
+	set fish_color_redirection normal --bold # the color for IO redirections
+	set fish_color_end blue --bold # the color for process separators like ';' and '&'
+	set fish_color_error brred --bold # the color used to highlight potential errors
+	set fish_color_param normal # the color for regular command parameters
+	set fish_color_comment white # the color used for code comments
+	set fish_color_match white # the color used to highlight matching parenthesis
+	set fish_color_selection normal --background=black # the color used when selecting text (in vi visual mode)
+	#set fish_color_search_match # used to highlight history search matches and the selected pager item (must be a background)
+	set fish_color_operator cyan --bold # the color for parameter expansion operators like '*' and '~'
+	set fish_color_escape green --bold # the color used to highlight character escapes like '\n' and '\x70'
+	#set fish_color_cwd # the color used for the current working directory in the default prompt
+	set fish_color_autosuggestion 445a77 # the color used for autosuggestions
+	#set fish_color_user # the color used to print the current username in some of fish default prompts
+	#set fish_color_host # the color used to print the current host system in some of fish default prompts
+	#set fish_color_cancel # the color for the '^C' indicator on a canceled command
+	set fish_pager_color_prefix bryellow # the color of the prefix string, i.e. the string that is to be completed
+	set fish_pager_color_completion normal # the color of the completion itself
+	set fish_pager_color_description white # the color of the completion description
+	set fish_pager_color_progress brgreen --bold # the color of the progress bar at the bottom left corner
+	#set fish_pager_color_secondary # the background color of the every second completion
 end
 

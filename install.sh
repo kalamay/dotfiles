@@ -23,5 +23,8 @@ for FILE in $FILES; do
 done
 
 mkdir -p "$HOME/.config/fish"
+for FILE in $(ls $DIR/fish); do
+	ln -sf "$DIR/fish/$FILE" "$HOME/.config/fish/$FILE"
+done
+
 ln -sf "$DIR/alacritty.yml" "$HOME/.config/alacritty.yml"
-ln -sf "$DIR/config.fish" "$HOME/.config/fish/config.fish"
