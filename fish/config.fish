@@ -10,13 +10,13 @@ set -x EDITOR vim
 
 function fish_prompt
 	# if the last command failed, print the status code
-	set -l last_command_status $status
-	if test $last_command_status -ne 0
-		set_color green
-		echo -n "exit: "
-		set_color red
-		echo "$last_command_status"
-	end
+	#set -l last_command_status $status
+	#if test $last_command_status -ne 0
+	#	set_color green
+	#	echo -n "exit: "
+	#	set_color red
+	#	echo "$last_command_status"
+	#end
 
 	# when not in tmux, print the current status information
 	if test -z $TMUX
