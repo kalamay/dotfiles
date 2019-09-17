@@ -14,13 +14,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'scrooloose/nerdtree'
-let g:NERDTreeHijackNetrw=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeShowLineNumbers=1
-nnoremap <silent> <C-n> :edit .<CR>
-
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 nnoremap <Leader>u :UndotreeToggle<CR>
 
