@@ -24,6 +24,7 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dag/vim-fish', { 'for': ['fish'] }
+Plug 'hashivim/vim-terraform'
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[
