@@ -93,7 +93,6 @@ hi SignColumn ctermbg=none
 "hi SpellCap"       .s:fmt_curl   .s:fg_none   .s:bg_none    .s:sp_violet
 "hi SpellRare"      .s:fmt_curl   .s:fg_none   .s:bg_none    .s:sp_cyan
 "hi SpellLocal"     .s:fmt_curl   .s:fg_none   .s:bg_none    .s:sp_yellow
-hi TabLineSel ctermfg=none ctermbg=none cterm=bold
 hi MatchParen     ctermfg=9 ctermbg=none cterm=bold
 hi link lCursor Cursor
 hi link vimGroup Constant
@@ -123,12 +122,13 @@ if &bg == "dark"
 	hi DiffChange ctermfg=3 ctermbg=7
 	hi DiffDelete ctermfg=2 ctermbg=7
 	hi DiffText ctermfg=4 ctermbg=7
-	hi Pmenu ctermbg=7 ctermfg=none cterm=none
-	hi PmenuSel ctermbg=4 ctermfg=none cterm=none
+	hi Pmenu ctermbg=7 ctermfg=8 cterm=none
+	hi PmenuSel ctermbg=4 ctermfg=8 cterm=none
 	hi PmenuSbar ctermbg=15
 	hi PmenuThumb ctermbg=8
-	hi TabLine ctermfg=0 ctermbg=7 cterm=none
-	hi TabLineFill ctermfg=7 ctermbg=none
+	hi TabLine ctermfg=7 ctermbg=8 cterm=none
+	hi TabLineFill ctermfg=8 ctermbg=none
+	hi TabLineSel ctermfg=none ctermbg=none cterm=bold
 	hi CursorColumn ctermbg=8 cterm=none
 	hi CursorLine ctermbg=8 cterm=none
 	hi CursorLineNr ctermfg=12 ctermbg=8 cterm=none
@@ -156,6 +156,7 @@ else
 	hi PmenuThumb ctermbg=7
 	hi TabLine ctermfg=7 ctermbg=0 cterm=none
 	hi TabLineFill ctermfg=0 ctermbg=none
+	hi TabLineSel ctermfg=none ctermbg=none cterm=bold
 	hi CursorColumn ctermbg=15 cterm=none
 	hi CursorLine ctermbg=15 cterm=none
 	hi CursorLineNr ctermfg=12 ctermbg=15 cterm=none
