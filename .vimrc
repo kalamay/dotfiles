@@ -18,7 +18,6 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 nnoremap <Leader>u :UndotreeToggle<CR>
 
 Plug 'tikhomirov/vim-glsl', { 'for': ['glsl'] }
-Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
@@ -28,6 +27,9 @@ Plug 'hashivim/vim-terraform'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go'] }
 let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
+
+Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+Plug 'racer-rust/vim-racer'
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[
