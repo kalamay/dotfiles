@@ -30,6 +30,7 @@ let g:go_highlight_diagnostic_warnings = 0
 
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'racer-rust/vim-racer'
+let g:rustfmt_autosave = 1
 
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
 let s:clang_library_paths=[
