@@ -1,4 +1,5 @@
 set -x GOPATH $HOME/dev
+set -x GOPRIVATE "github.com/segmentio"
 set -x ROBO_CONFIG $GOPATH/src/github.com/segmentio/robofiles/development/robo.yml
 set -x SEGMENT_TEAM platform
 set -x SEGMENT_USER jeremy.larkin@segment.com
@@ -100,8 +101,7 @@ function __complete_tm
 	printf "%s\tSession\n" $sessions
 
 	set comp (commandline -ct)
-	set -l dirs (complete -C"nonexistentcommandooheehoohaahaahdingdongwallawallabingbang $comp" | string match -r '.*/$')
-	printf "%s\tDirectory\n" $dirs
+	complete -C"nonexistentcommandooheehoohaahaahdingdongwallawallabingbang $comp" | string match -r '.*/$'
 end
 
 complete -c tm -x
