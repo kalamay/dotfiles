@@ -11,8 +11,11 @@ let c_no_curly_error = 1
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
-Plug 'christoomey/vim-tmux-navigator'
+if !has("gui_running")
+	Plug 'christoomey/vim-tmux-navigator'
+endif
 
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 nnoremap <Leader>u :UndotreeToggle<CR>
@@ -46,6 +49,8 @@ for path in s:clang_library_paths
 endfor
 
 nnoremap <C-P> :call fzy#Command("pls", ":e")<CR>
+" Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+" nnoremap <C-P> :Clap files<CR>
 
 try
 	set completeopt=menuone,noinsert
@@ -129,7 +134,7 @@ set visualbell t_vb=
 if has('gui_running')
 	if has('mac')
 		set fuoptions=maxvert,maxhorz
-		set guifont=SF\ Mono\ Regular:h12
+		set guifont=SF\ Mono\ Regular:h13
 	else
 		set guifont=Bitstream\ Vera\ Sans\ Mono:h10
 	endif
@@ -138,7 +143,7 @@ if has('gui_running')
 	set guioptions-=T
 	set nolist
 	set number
-	colorscheme srcery
+	colorscheme gruvbox
 	nnoremap <D-S-Right> :tabnext<CR>
 	nnoremap <D-S-Left> :tabprev<CR>
 else
