@@ -197,7 +197,7 @@ function conanit -a dir
 	end
 end
 
-if test -z $TMUX
+if test -z "$TMUX$MYVIMRC"
 	tmux new-session -A -s shell -c $HOME
 else
 	fish_vi_key_bindings
