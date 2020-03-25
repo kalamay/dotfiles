@@ -27,6 +27,8 @@ Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'dag/vim-fish', { 'for': ['fish'] }
 Plug 'hashivim/vim-terraform'
 
+Plug 'evanleck/vim-svelte'
+
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': ['go'] }
 let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
