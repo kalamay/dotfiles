@@ -31,3 +31,4 @@ done
 
 rm -f "$HOME/.config/alacritty.yml"
 ln -s "$DIR/alacritty.yml" "$HOME/.config/alacritty.yml"
+tic "$DIR/xterm-256color-italic.terminfo"
