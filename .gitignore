@@ -1,3 +1,4 @@
 .DS_Store
+*.dSYM
 .vim/plugged
 .vim/.netrwhist
