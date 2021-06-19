@@ -74,7 +74,6 @@ def command(name, sys=name, &block)
   RUBY
 end
 
-command 'ls', 'ls -G'
 command 'll', 'ls -Gl'
 command 'la', 'ls -Gla'
 command 'tree', 'tree'
