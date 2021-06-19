@@ -37,18 +37,18 @@ Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'racer-rust/vim-racer'
 let g:rustfmt_autosave = 1
 
-"Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
-"let s:clang_library_paths=[
-"			\'/Library/Developer/CommandLineTools/usr/lib/libclang.dylib',
-"			\'/usr/lib/llvm-5.0/lib/libclang.so.1',
-"			\'/usr/lib/llvm-4.0/lib/libclang.so.1',
-"			\'/usr/lib/llvm-3.5/lib/libclang.so.1']
-"for path in s:clang_library_paths
-"	if filereadable(path)
-"		let g:clang_library_path=path
-"		break
-"	endif
-"endfor
+Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'objc', 'cc', 'cxx', 'cpp'] } 
+let s:clang_library_paths=[
+			\'/Library/Developer/CommandLineTools/usr/lib/libclang.dylib',
+			\'/usr/lib/llvm-5.0/lib/libclang.so.1',
+			\'/usr/lib/llvm-4.0/lib/libclang.so.1',
+			\'/usr/lib/llvm-3.5/lib/libclang.so.1']
+for path in s:clang_library_paths
+	if filereadable(path)
+		let g:clang_library_path=path
+		break
+	endif
+endfor
 
 nnoremap <C-P> :call fzy#Command("pls", ":e")<CR>
 " Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
@@ -177,6 +177,7 @@ set nowrap
 
 set backspace=eol,start,indent
 set whichwrap+=<,>
+set fo+=j
 
 set hlsearch
 set incsearch
@@ -205,3 +206,9 @@ nnoremap K :exe ":Man -s2,3 " . expand('<cword>')<CR>
 
 nmap <Leader>c :call syntax#Stack()<CR>
 
+function! GoAsmSymbol()
+	:'<,'>s/\./·/
+	:'<,'>s/\//∕/
+endfunction
+
+command! -range=% GoAsmSymbol :call GoAsmSymbol()
