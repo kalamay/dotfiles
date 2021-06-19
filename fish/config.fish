@@ -3,8 +3,17 @@ set -x GOPRIVATE "github.com/segmentio"
 set -x ROBO_CONFIG $GOPATH/src/github.com/segmentio/robofiles/development/robo.yml
 set -x SEGMENT_TEAM platform
 set -x SEGMENT_USER jeremy.larkin@segment.com
-set -x PATH $HOME/opt/bin /usr/local/sbin $HOME/.cargo/bin /usr/local/bin /usr/local/lib/ruby/gems/2.5.0/bin $HOME/.yarn/bin $HOME/.config/yarn/global/node_modules/.bin $GOPATH/bin $PATH
-set -x TERM xterm-256color-italic
+set -x PATH \
+	$HOME/opt/bin \
+	$HOME/.cargo/bin \
+	/usr/local/opt/llvm/bin \
+	/usr/local/sbin \
+	/usr/local/bin \
+	/usr/local/opt/ruby/bin \
+	/usr/local/lib/ruby/gems/3.0.0/bin \
+	$HOME/.yarn/bin \
+	$HOME/.config/yarn/global/node_modules/.bin \
+	$GOPATH/bin $PATH
 
 set -x LSCOLORS GxFxCxDxBxegehxbxgxcxd
 set -x LS_COLORS 'di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
