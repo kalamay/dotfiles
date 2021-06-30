@@ -7,6 +7,7 @@ require('paq-nvim') {
 	{'savq/paq-nvim', opt = true};
 	'tpope/vim-vinegar';
 	'mbbill/undotree';
+	'christoomey/vim-tmux-navigator';
 
 	{'nvim-treesitter/nvim-treesitter', run=vim.fn[':TSUpdate'] };
 	'nvim-treesitter/playground';
