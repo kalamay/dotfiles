@@ -33,8 +33,8 @@ opt.wildignore = {
 
 cmd('colorscheme terminal')
 
-cmd("autocmd BufEnter *.go lua enable_lsp()")
-cmd("autocmd BufEnter *.c lua enable_lsp()")
+cmd("autocmd BufWinEnter *.go lua lsp:enable()")
+cmd("autocmd BufWinEnter *.c lua lsp:enable()")
 cmd("autocmd BufWritePre *.go Fmt")
 
 lsp.handlers["textDocument/publishDiagnostics"] = function() end
