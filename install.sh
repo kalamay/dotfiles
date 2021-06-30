@@ -17,18 +17,19 @@ for FILE in $(ls $DIR/bin); do
 	ln -sf "$DIR/bin/$FILE" "$HOME/opt/bin/$FILE"
 done
 
-FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
-for FILE in $FILES; do
+HOME_FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
+for FILE in $HOME_FILES; do
 	rm -f "$HOME/$FILE"
 	ln -s "$DIR/$FILE" "$HOME/$FILE"
 done
 
-mkdir -p "$HOME/.config/fish"
-for FILE in $(ls $DIR/fish); do
-	rm -f "$HOME/.config/fish/$FILE"
-	ln -s "$DIR/fish/$FILE" "$HOME/.config/fish/$FILE"
+mkdir -p "$HOME/.config"
+for FILE in $(ls $DIR/config); do
+	rm -f "$HOME/.config/$FILE"
+	ln -s "$DIR/config/$FILE" "$HOME/.config/$FILE"
 done
 
-rm -f "$HOME/.config/alacritty.yml"
-ln -s "$DIR/alacritty.yml" "$HOME/.config/alacritty.yml"
-tic "$DIR/xterm-256color.terminfo"
+PAQ_PATH="$HOME/.local/share/nvim/site/pack/paqs/opt/paq-nvim" 
+if [[ ! -d "$PAQ_PATH" ]]; then
+	git clone https://github.com/savq/paq-nvim.git "$PAQ_PATH"
+fi

@@ -3,3 +3,6 @@
 .vim/plugged
 .vim/view
 .vim/.netrwhist
+local/share/nvim/shada
+config/fish/fish_variables
+config/fish/fishd.*
