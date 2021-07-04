@@ -6,3 +6,4 @@
 local/share/nvim/shada
 config/fish/fish_variables
 config/fish/fishd.*
+config/alacritty/theme.yml

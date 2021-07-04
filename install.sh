@@ -33,3 +33,5 @@ PAQ_PATH="$HOME/.local/share/nvim/site/pack/paqs/opt/paq-nvim"
 if [[ ! -d "$PAQ_PATH" ]]; then
 	git clone https://github.com/savq/paq-nvim.git "$PAQ_PATH"
 fi
+
+theme
