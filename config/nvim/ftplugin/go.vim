@@ -1,48 +1,52 @@
-" Copyright 2013 The Go Authors. All rights reserved.
-" Use of this source code is governed by a BSD-style
-" license that can be found in the LICENSE file.
-"
-" go.vim: Vim filetype plugin for Go.
 if exists("b:did_ftplugin")
-    finish
+  finish
 endif
 let b:did_ftplugin = 1
 
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
-let b:undo_ftplugin = "setl com< cms<"
-
-if !exists("g:gofmt_command")
-    let g:gofmt_command = "gofmt"
-endif
-
-command! -buffer Fmt call GoFormat()
+command! -buffer GoFmt call GoFormat()
 
 function! GoFormat()
-    let view = winsaveview()
-    silent execute "%!" . g:gofmt_command
-    if v:shell_error
-        let errors = []
-        for line in getline(1, line('$'))
-            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
-            if !empty(tokens)
-                call add(errors, {"filename": @%,
-                                 \"lnum":     tokens[2],
-                                 \"col":      tokens[3],
-                                 \"text":     tokens[4]})
-            endif
-        endfor
-        if empty(errors)
-            % | " Couldn't detect gofmt error format, output errors
-        endif
-        undo
-        if !empty(errors)
-            call setloclist(0, errors, 'r')
-        endif
-        echohl Error | echomsg "Gofmt returned error" | echohl None
-    endif
-    call winrestview(view)
+  let winv = winsaveview()
+
+  let lines = getline(1, '$')
+  if &encoding != 'utf-8'
+    let lines = map(lines, 'iconv(v:val, &encoding, "utf-8")')
+  endif
+
+  let err = []
+  let out = systemlist('goimports', lines)
+
+  if v:shell_error != 0
+    let buf = bufnr('%')
+    for idx in range(0, len(out)-1)
+      let m = matchlist(out[idx], '^\([^:]*\):\([^:]*\):\([^:]*\): \(.*\)$')
+      if len(m) > 0
+        call add(err, {'bufnr':buf,'lnum':str2nr(m[2]),'col':str2nr(m[3])-1,'text':m[4]})
+      endif
+    endfor
+  endif
+
+  call setloclist(0, err, 'r')
+  call setloclist(0, [], 'a', {'title':'GoFmt'})
+  if len(err) > 0
+    lopen
+    return
+  else
+    lclose
+  end
+
+  call append(0, out)
+  call deletebufline("%", len(out) + 1, "$")
+
+  let line = lines[winv.lnum-1]
+  let winv.lnum += len(out) - len(lines)
+  let winv.col += len(out[winv.lnum-1]) - len(line)
+  call winrestview(winv)
+
+  syntax sync fromstart
 endfunction
 
-" vim:ts=4:sw=4:et
+" vim:ts=2:sw=2:et

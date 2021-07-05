@@ -35,6 +35,6 @@ cmd('colorscheme terminal')
 
 cmd("autocmd BufWinEnter *.go lua lsp:enable()")
 cmd("autocmd BufWinEnter *.c lua lsp:enable()")
-cmd("autocmd BufWritePre *.go Fmt")
+cmd("autocmd BufWritePre *.go GoFmt")
 
 lsp.handlers["textDocument/publishDiagnostics"] = function() end
