@@ -38,8 +38,7 @@ function! GoFormat()
     lclose
   end
 
-  call append(0, out)
-  call deletebufline("%", len(out) + 1, "$")
+  call s:replacelines(lines, out)
 
   if len(out) > 0
     let line = lines[winv.lnum-1]
@@ -49,6 +48,23 @@ function! GoFormat()
   call winrestview(winv)
 
   syntax sync fromstart
+endfunction
+
+function! s:replacelines(old, new)
+  if len(a:old) == len(a:new)
+    let diff = 0
+    for idx in range(0, len(a:old)-1)
+      if a:old[idx] != a:new[idx]
+        let diff = 1
+        break
+      endif
+    endfor
+    if diff == 0
+      return
+    endif
+  endif
+  call append(0, a:new)
+  call deletebufline("%", len(a:new) + 1, "$")
 endfunction
 
 " vim:ts=2:sw=2:et
