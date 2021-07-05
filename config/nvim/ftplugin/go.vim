@@ -7,6 +7,8 @@ setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
 command! -buffer GoFmt call GoFormat()
+command! -buffer GoReferences lua vim.lsp.buf.references()
+command! -buffer GoRename lua vim.lsp.buf.rename()
 
 function! GoFormat()
   let winv = winsaveview()
