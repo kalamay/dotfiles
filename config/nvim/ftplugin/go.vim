@@ -41,9 +41,11 @@ function! GoFormat()
   call append(0, out)
   call deletebufline("%", len(out) + 1, "$")
 
-  let line = lines[winv.lnum-1]
-  let winv.lnum += len(out) - len(lines)
-  let winv.col += len(out[winv.lnum-1]) - len(line)
+  if len(out) > 0
+    let line = lines[winv.lnum-1]
+    let winv.lnum += len(out) - len(lines)
+    let winv.col += len(out[winv.lnum-1]) - len(line)
+  end
   call winrestview(winv)
 
   syntax sync fromstart
