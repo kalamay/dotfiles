@@ -31,7 +31,7 @@ opt.wildignore = {
 	'tmp', 'node_modules'
 }
 
-cmd('colorscheme terminal')
+cmd('colorscheme nord')
 
 cmd("autocmd BufWinEnter *.go lua lsp:enable()")
 cmd("autocmd BufWinEnter *.c lua lsp:enable()")
