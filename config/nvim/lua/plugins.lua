@@ -19,9 +19,23 @@ require('paq-nvim') {
 	'nvim-telescope/telescope.nvim';
 }
 
+local util = require('lspconfig/util')
+local goroot = nil
+local gopath = os.getenv("GOPATH") or ""
+local gopathmod = gopath..'/pkg/mod'
+
 local lspconfig = require('lspconfig')
-lspconfig.gopls.setup{}
 lspconfig.clangd.setup{}
+lspconfig.gopls.setup{
+	root_dir = function(fname)
+		local fullpath = vim.fn.expand(fname, ':p')
+		if string.find(fullpath, gopathmod) and goroot ~= nil then
+			return goroot
+		end
+		goroot = util.root_pattern("go.mod", ".git")(fname)
+		return goroot
+	end,
+}
 
 lsp = {}
 

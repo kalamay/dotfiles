@@ -34,7 +34,11 @@ function! GoFormat()
   call setloclist(0, err, 'r')
   call setloclist(0, [], 'a', {'title':'GoFmt'})
   if len(err) > 0
-    lopen
+    if len(err) > 10
+      lopen
+    else
+      call execute("lopen ".len(err))
+    end
     return
   else
     lclose
@@ -48,8 +52,6 @@ function! GoFormat()
     let winv.col += len(out[winv.lnum-1]) - len(line)
   end
   call winrestview(winv)
-
-  syntax sync fromstart
 endfunction
 
 function! s:replacelines(old, new)
@@ -67,6 +69,7 @@ function! s:replacelines(old, new)
   endif
   call append(0, a:new)
   call deletebufline("%", len(a:new) + 1, "$")
+  syntax sync fromstart
 endfunction
 
 " vim:ts=2:sw=2:et
