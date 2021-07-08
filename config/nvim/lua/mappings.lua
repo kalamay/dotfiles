@@ -22,3 +22,5 @@ map("n", "<C-P>", ":Telescope find_files<CR>")
 
 map("n", "<Space>", "za")
 map("n", "<CR>", ":let @/=''<CR>", { silent = true })
+
+cmd("autocmd BufWinEnter * if &buftype == 'quickfix' | call quickfix#start() | endif")
