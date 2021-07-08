@@ -17,6 +17,8 @@ require('paq-nvim') {
 	'nvim-lua/popup.nvim';
 	'nvim-lua/plenary.nvim';
 	'nvim-telescope/telescope.nvim';
+
+	'dag/vim-fish';
 }
 
 local util = require('lspconfig/util')
