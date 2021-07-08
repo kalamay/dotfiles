@@ -4,7 +4,7 @@ local set_hl = vim.api.nvim_set_hl
 
 local nord = {
 	--+--- Polar Night ---+
-	"#2e3440", "#3b4252", "#434c5e", "#4c566a",
+	"#2e3440", "#3b4252", "#434c5e", "#4c566a", "#616E88",
 
 	--+--- Snow Storm ---+
 	"#d8dee9", "#e5e9f0", "#eceff4",
@@ -17,98 +17,130 @@ local nord = {
 
 	--+--- Editor ---+
 	ColorColumn         = {          bg = 1,  "NONE" },
-	Cursor              = { fg = 0,  bg = 4,  "NONE" },
+	Cursor              = { fg = 0,  bg = 5,  "NONE" },
 	CursorLine          = {          bg = 1,  "NONE" },
-	CursorLineNR        = { fg = 4,  bg = 1,  "NONE" },
+	CursorLineNR        = { fg = 10, bg = 1,  "NONE" },
 	CursorColumn        = {          bg = 1,  "NONE" },
-	Error               = { fg = 4,  bg = 11, },
-	iCursor             = { fg = 0,  bg = 4,  },
+	Error               = { fg = 5,  bg = 12, },
+	iCursor             = { fg = 0,  bg = 5,  },
 	LineNr              = { fg = 3,           },
-	MatchParen          = { fg = 8,  bg = 3,  },
+	MatchParen          = { fg = 9,  bg = 3,  },
 	NonText             = { fg = 2,           },
-	Normal              = { fg = 5,  bg = 0,  },
-	Pmenu               = { fg = 4,  bg = 2,  "NONE" },
-	PmenuSbar           = { fg = 4,  bg = 2,  },
-	PmenuSel            = { fg = 8,  bg = 3,  },
-	PmenuThumb          = { fg = 8,  bg = 3,  },
+	Normal              = { fg = 6,  bg = 0,  },
+	Pmenu               = { fg = 5,  bg = 2,  "NONE" },
+	PmenuSbar           = { fg = 5,  bg = 2,  },
+	PmenuSel            = { fg = 9,  bg = 3,  },
+	PmenuThumb          = { fg = 9,  bg = 3,  },
 	SpecialKey          = { fg = 1,           },
 	NonText             = { fg = 1,           },
-	SpellBad            = { fg = 11, bg = 0,  "undercurl" },
-	SpellCap            = { fg = 13, bg = 0,  "undercurl" },
-	SpellLocal          = { fg = 5,  bg = 0,  "undercurl" },
-	SpellRare           = { fg = 6,  bg = 0,  "undercurl" },
+	SpellBad            = { fg = 12, bg = 0,  "undercurl" },
+	SpellCap            = { fg = 14, bg = 0,  "undercurl" },
+	SpellLocal          = { fg = 6,  bg = 0,  "undercurl" },
+	SpellRare           = { fg = 7,  bg = 0,  "undercurl" },
 	Visual              = {          bg = 2,  },
 	VisualNOS           = {          bg = 2,  },
+	Whitespace          = "NonText",
 
 	--+--- Navigation ---+
-	Directory           = { fg = 8,           },
+	Directory           = { fg = 9,           },
 
 	--+--- Prompt/Status ---+
 	EndOfBuffer         = { fg = 1,           },
-	ErrorMsg            = { fg = 4,  bg = 11, },
-	ModeMsg             = { fg = 4,           },
-	MoreMsg             = { fg = 8,           },
-	Question            = { fg = 4,           },
-  	StatusLine          = { fg = 8,  bg = 3,  "bold" },
-  	StatusLineNC        = { fg = 2,  bg = 4,  "NONE" },
-  	StatusLineTerm      = { fg = 8,  bg = 3,  "NONE" },
-  	StatusLineTermNC    = { fg = 2,  bg = 4,  "NONE" },
-	WarningMsg          = { fg = 0,  bg = 13, },
-	WildMenu            = { fg = 8,  bg = 1,  },
+	ErrorMsg            = { fg = 5,  bg = 12, },
+	ModeMsg             = { fg = 5,           },
+	MoreMsg             = { fg = 9,           },
+	WarningMsg          = { fg = 0,  bg = 14, },
+	WildMenu            = { fg = 9,  bg = 1,  },
+	Question            = { fg = 5,           },
+	StatusLine          = { fg = 0,  bg = 0,  },
+	StatusLineNC        = { fg = 0,  bg = 0,  },
+	StatusLineTerm      = { fg = 0,  bg = 0,  },
+	StatusLineTermNC    = { fg = 0,  bg = 0,  },
+	StatusModeNormal    = { fg = 0,  bg = 10, "bold" },
+	StatusModeInsert    = { fg = 0,  bg = 15, "bold" },
+	StatusModeVisual    = { fg = 0,  bg = 16, "bold" },
+	StatusModeReplace   = { fg = 0,  bg = 12, "bold" },
+	StatusModeCommand   = { fg = 0,  bg = 14, "bold" },
+	StatusModeSelect    = "StatusModeVisual",
+	StatusModeTerm      = "StatusModeCommand",
+	StatusFile          = { fg = 5,  bg = 3,  },
+	StatusMeta          = { fg = 4,  bg = 1,  },
+	StatusScroll        = { fg = 10, bg = 3,  },
+	StatusModeNC        = { fg = 0,  bg = 3,  },
+	StatusFileNC        = { fg = 0,  bg = 2,  },
+	StatusMetaNC        = { fg = 0,  bg = 1,  },
+	StatusScrollNC      = { fg = 0,  bg = 2,  },
 
 	--+--- Search ---+
-	IncSearch           = { fg = 1,  bg = 12, "underline" },
-	Search              = { fg = 1,  bg = 13, "NONE" },
-
+	IncSearch           = { fg = 1,  bg = 13, "underline" },
+	Search              = { fg = 1,  bg = 14, "NONE" },
+	QuickFixLine        = { fg = 1,  bg = 9,  "NONE" },
 
 	--"+--- Tabs ---+
-	TabLine             = { fg = 4, bg = 1,   "NONE" },
-	TabLineFill         = { fg = 4, bg = 1,   "NONE" },
-	TabLineSel          = { fg = 8, bg = 3,   "NONE" },
+	TabLine             = { fg = 5,  bg = 1,  "NONE" },
+	TabLineFill         = { fg = 5,  bg = 1,  "NONE" },
+	TabLineSel          = { fg = 9,  bg = 3,  "NONE" },
 
 	--+--- Window ---+
-	Title               = { fg = 4,           "NONE" },
-	VertSplit           = { fg = 2, bg = 0,   "NONE" },
+	Title               = { fg = 5,           "NONE" },
+	VertSplit           = { fg = 2,  bg = 0,  "NONE" },
 
 	--+--- Language ---+
-	Boolean             = { fg = 9,           },
-	Character           = { fg = 14,          },
-	Comment             = { fg = 3,           "italic" },
-	Conditional         = { fg = 9,           },
-	Constant            = { fg = 4,           },
-	Define              = { fg = 9,           },
-	Delimiter           = { fg = 6,           },
-	Exception           = { fg = 9,           },
-	Float               = { fg = 15,          },
-	Function            = { fg = 8,           },
-	Identifier          = { fg = 4,           "NONE" },
-	Include             = { fg = 9,           },
-	Keyword             = { fg = 9,           },
-	Label               = { fg = 9,           },
-	Number              = { fg = 15,          },
-	Operator            = { fg = 9,           "NONE" },
-	PreProc             = { fg = 9,           "NONE" },
-	Repeat              = { fg = 9,           },
-	Special             = { fg = 4,           },
-	SpecialChar         = { fg = 13,          },
-	SpecialComment      = { fg = 8,           "italic" },
-	Statement           = { fg = 9,           },
-	StorageClass        = { fg = 9,           },
-	String              = { fg = 14,          },
-	Structure           = { fg = 9,           },
-	Tag                 = { fg = 4,           },
-	Todo                = { fg = 13,          },
-	Type                = { fg = 9,           "NONE" },
-	Typedef             = { fg = 9,           },
+	Boolean             = { fg = 10,          },
+	Character           = { fg = 15,          },
+	Comment             = { fg = 4,           "italic" },
+	Conditional         = { fg = 10,          },
+	Constant            = { fg = 16,          },
+	Define              = { fg = 10,          },
+	Delimiter           = { fg = 7,           },
+	Exception           = { fg = 10,          },
+	Float               = { fg = 16,          },
+	Function            = { fg = 9,           },
+	Identifier          = { fg = 5,           "NONE" },
+	Include             = { fg = 16,          "bold"},
+	Keyword             = { fg = 10,          },
+	Number              = { fg = 12,          },
+	Operator            = { fg = 10,          "NONE" },
+	PreProc             = { fg = 16,          "bold" },
+	Special             = { fg = 5,           },
+	SpecialChar         = { fg = 14,          },
+	SpecialComment      = { fg = 9,           "italic" },
+	Statement           = { fg = 10,          "bold" },
+	StorageClass        = { fg = 10,          },
+	String              = { fg = 15,          },
+	Structure           = { fg = 10,          },
+	Tag                 = { fg = 5,           },
+	Todo                = { fg = 0,  bg = 12, "bold" },
+	Type                = { fg = 10,          "NONE" },
+	Typedef             = { fg = 10,          },
+	Label               = "Conditional",
+	Repeat              = "Conditional",
 	Macro               = "Define",
 	PreCondit           = "PreProc",
 
 	--+--- Diff ---+
-	DiffAdd             = { fg = 14, bg = 1,  },
-	DiffChange          = { fg = 13, bg = 1,  },
-	DiffDelete          = { fg = 11, bg = 1,  },
-	DiffText            = { fg = 9,  bg = 1,  },
+	DiffAdd             = { fg = 15, bg = 1,  },
+	DiffChange          = { fg = 14, bg = 1,  },
+	DiffDelete          = { fg = 12, bg = 1,  },
+	DiffText            = { fg = 10, bg = 1,  },
 }
+
+g.terminal_color_0 = nord[1+1]
+g.terminal_color_1 = nord[1+11]
+g.terminal_color_2 = nord[1+14]
+g.terminal_color_3 = nord[1+13]
+g.terminal_color_4 = nord[1+9]
+g.terminal_color_5 = nord[1+15]
+g.terminal_color_6 = nord[1+8]
+g.terminal_color_7 = nord[1+5]
+g.terminal_color_8 = nord[1+3]
+g.terminal_color_9 = nord[1+11]
+g.terminal_color_10 = nord[1+14]
+g.terminal_color_11 = nord[1+13]
+g.terminal_color_12 = nord[1+9]
+g.terminal_color_13 = nord[1+15]
+g.terminal_color_14 = nord[1+7]
+g.terminal_color_15 = nord[1+6]
 
 local function render_hi(name, val, colors)
 	if type(val) == "string" then
@@ -118,16 +150,22 @@ local function render_hi(name, val, colors)
 	local opts = ""
 	for i,v in ipairs({"fg", "bg"}) do
 		if val[v] ~= nil then
-			opts = opts..string.format(" gui%s=%s", v, colors[val[v]+1])
+			local c = val[v]
+			if type(c) == "number" then
+				c = colors[c+1]
+			end
+			opts = opts..string.format(" gui%s=%s", v, c)
 		end
 	end
 
 	local attrs = table.concat(val, ",")
-	if attrs ~= "" and attrs ~= "NONE" then
-		opts = opts..string.format(" gui=%s", attrs)
+	if attrs == "" then
+		attrs = "nocombine"
+	else 
+		attrs = attrs .. ",nocombine"
 	end
 
-	return string.format('hi %s%s', name, opts)
+	return string.format('hi %s%s gui=%s', name, opts, attrs)
 end
 
 local function render(name, hi)
