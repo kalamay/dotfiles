@@ -1,6 +1,7 @@
 local cmd = vim.cmd
 local opt = vim.opt
 local lsp = vim.lsp
+local api = vim.api
 
 local indent = 4
 
@@ -21,6 +22,9 @@ opt.hidden = true
 opt.showmatch = true
 opt.gdefault = true
 opt.shortmess = "filnxtToOFc"
+opt.number = true
+opt.scrolloff = 3
+opt.sidescrolloff = 8
 
 opt.pumheight = 15
 opt.completeopt = {'menuone', 'noinsert', 'noselect'}
@@ -31,10 +35,14 @@ opt.wildignore = {
 	'tmp', 'node_modules'
 }
 
-cmd('colorscheme nord')
-
-cmd("autocmd BufWinEnter *.go lua lsp:enable()")
-cmd("autocmd BufWinEnter *.c lua lsp:enable()")
-cmd("autocmd BufWritePre *.go GoFmt")
+cmd[[
+	autocmd BufWinEnter *.go lua lsp:enable()
+	autocmd BufWinEnter *.c lua lsp:enable()
+	autocmd BufWritePre *.go GoFmt
+	autocmd WinEnter * set cul
+	autocmd WinLeave * set nocul
+]]
 
 lsp.handlers["textDocument/publishDiagnostics"] = function() end
+
+cmd('colorscheme nord')
