@@ -23,4 +23,8 @@ map("n", "<C-P>", ":Telescope find_files<CR>")
 map("n", "<Space>", "za")
 map("n", "<CR>", ":let @/=''<CR>", { silent = true })
 
+map("n", "<Leader>c", ':call syntax#show()<CR>')
+
+cmd('command! -nargs=+ -complete=highlight Hi call syntax#echo(<f-args>)')
+
 cmd("autocmd BufWinEnter * if &buftype == 'quickfix' | call quickfix#start() | endif")
