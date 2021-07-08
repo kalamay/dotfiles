@@ -19,6 +19,7 @@ map("n", "[l", ":lprevious<CR>")
 map("n", "<Leader>u", ":UndotreeToggle<CR>")
 
 map("n", "<C-P>", ":Telescope find_files<CR>")
+map("n", "<C-B>", ":Telescope buffers<CR>")
 
 map("n", "<Space>", "za")
 map("n", "<CR>", ":let @/=''<CR>", { silent = true })

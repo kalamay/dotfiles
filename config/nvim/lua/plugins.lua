@@ -44,3 +44,18 @@ function lsp:enable()
 	api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
 	api.nvim_buf_set_keymap(0, 'n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
 end
+
+require("telescope").setup{
+	defaults = {
+		layout_strategy = "vertical",
+		layout_defaults = {
+			vertical = {
+				width_padding = 0.05,
+				height_padding = 1,
+				preview_height = 0.5,
+			}
+		},
+		results_height = 10,
+		set_env = { ['COLORTERM'] = 'truecolor' },
+	}
+}
