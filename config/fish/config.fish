@@ -31,20 +31,20 @@ function fish_prompt
 
 	# when not in tmux, print the current status information
 	if test -z $TMUX
-		set_color yellow --bold
+		set_color yellow
 		echo -n (prompt_hostname) ""
 		set_color normal
-		set_color white
+		set_color brblack
 		echo -n (prompt_pwd) ""
 	end
 
 	switch $fish_bind_mode
 	case default
-		set_color red --bold
+		set_color blue --bold
 	case insert
 		set_color green --bold
 	case visual
-		set_color blue --bold
+		set_color magenta --bold
 	end
 
 	echo -n "% "
@@ -54,23 +54,25 @@ end
 set -g __fish_git_prompt_show_informative_status 1
 set -g __fish_git_prompt_hide_untrackedfiles 1
 
-set -g __fish_git_prompt_color_branch white
-set -g __fish_git_prompt_showupstream "informative"
-set -g __fish_git_prompt_char_upstream_ahead "↑"
-set -g __fish_git_prompt_char_upstream_behind "↓"
-set -g __fish_git_prompt_char_upstream_prefix ""
-
-set -g __fish_git_prompt_char_stagedstate ""
-set -g __fish_git_prompt_char_dirtystate "+"
-set -g __fish_git_prompt_char_untrackedfiles "*"
-set -g __fish_git_prompt_char_conflictedstate "x"
-set -g __fish_git_prompt_char_cleanstate ""
-
-set -g __fish_git_prompt_color_dirtystate green
+set -g __fish_git_prompt_color brblack
 set -g __fish_git_prompt_color_stagedstate cyan
 set -g __fish_git_prompt_color_invalidstate red
-set -g __fish_git_prompt_color_untrackedfiles white
-set -g __fish_git_prompt_color_cleanstate green
+set -g __fish_git_prompt_color_dirtystate green
+set -g __fish_git_prompt_color_untrackedfiles yellow
+set -g __fish_git_prompt_color_stashstate brblack
+set -g __fish_git_prompt_color_cleanstate magenta
+
+set -g __fish_git_prompt_char_cleanstate ' ✔'
+set -g __fish_git_prompt_char_dirtystate ' ✚'
+set -g __fish_git_prompt_char_invalidstate ' ✖'
+set -g __fish_git_prompt_char_stagedstate ' •'
+set -g __fish_git_prompt_char_untrackedfiles ' …'
+set -g __fish_git_prompt_char_upstream_ahead ' ↑'
+set -g __fish_git_prompt_char_upstream_behind ' ↓'
+set -g __fish_git_prompt_char_upstream_diverged ' ⇵'
+set -g __fish_git_prompt_char_upstream_equal ' ='
+set -g __fish_git_prompt_char_stateseparator ''
+set -g __fish_git_prompt_char_upstream_prefix (set_color white)
 
 function fish_right_prompt
   __fish_git_prompt
@@ -85,9 +87,11 @@ end
 alias y2j="ruby -ryaml -rjson -e 'YAML.load_stream(ARGF).each { |d| puts JSON.pretty_generate(d) }'"
 alias cc-defs="cc -dM -E -x c /dev/null"
 alias pls='git ls-files -co --exclude-standard ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
+alias vim=nvim
+alias vi=nvim
 
 function lt
-	tree -C $argv| less -R
+	tree -C $argv | less -R
 end
 
 alias tsh="tmk shell ~"
