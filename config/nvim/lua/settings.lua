@@ -36,6 +36,7 @@ opt.wildignore = {
 }
 
 cmd[[
+	autocmd BufWinEnter *.fish set filetype=fish
 	autocmd BufWinEnter *.go lua lsp:enable()
 	autocmd BufWinEnter *.c lua lsp:enable()
 	autocmd BufWritePre *.go GoFmt

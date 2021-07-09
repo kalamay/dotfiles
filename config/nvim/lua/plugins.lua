@@ -17,8 +17,6 @@ require('paq-nvim') {
 	'nvim-lua/popup.nvim';
 	'nvim-lua/plenary.nvim';
 	'nvim-telescope/telescope.nvim';
-
-	'dag/vim-fish';
 }
 
 local util = require('lspconfig/util')
@@ -46,6 +44,12 @@ function lsp:enable()
 	api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
 	api.nvim_buf_set_keymap(0, 'n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
 end
+
+require'nvim-treesitter.configs'.setup {
+	ensure_installed = { "go", "c", "cpp", "javascript", "lua", "yaml", "fish" },
+	highlight = { enable = true },
+	indent = { enable = true },
+}
 
 require("telescope").setup{
 	defaults = {
