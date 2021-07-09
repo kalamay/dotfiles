@@ -77,6 +77,8 @@ end
 command 'll', 'ls -Gl'
 command 'la', 'ls -Gla'
 command 'tree', 'tree'
+command 'ascii', 'ascii'
+command 'asciib', 'ascii -b'
 
 def pwd
   puts Dir.pwd
