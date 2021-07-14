@@ -17,7 +17,7 @@ set -x PATH \
 
 set -x LSCOLORS GxFxCxDxBxegehxbxgxcxd
 set -x LS_COLORS 'di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
-set -x EDITOR vim
+set -x EDITOR nvim
 
 function fish_prompt
 	# if the last command failed, print the status code
