@@ -1,21 +1,29 @@
-function! patch#apply_file(buf, file)
+function! patch#apply_file(buf, file, prompt)
 	let src = add(getbufline(a:buf, 1, '$'), "")
-	call patch#apply(a:buf, readfile(a:file), src)
+	call patch#apply(a:buf, readfile(a:file), src, a:prompt)
 endfunction
 
-function! patch#apply_cmd(buf, cmd)
+function! patch#apply_cmd(buf, cmd, prompt)
 	let src = add(getbufline(a:buf, 1, '$'), "")
 	let diff = systemlist(a:cmd, src, 1)
 	if v:shell_error != 0
 		return diff
 	endif
-	call patch#apply(a:buf, diff, src)
+	call patch#apply(a:buf, diff, src, a:prompt)
 	return []
 endfunction
 
-function! patch#apply(buf, diff, src)
+function! patch#apply(buf, diff, src, prompt)
 	let hunks = patch#parse(a:diff, a:src)
-	call patch#apply_hunks(a:buf, hunks)
+	if len(hunks) > 0
+		if a:prompt
+			call patch#echo(a:diff)
+			if !confirm("Apply?")
+				return
+			endif
+		endif
+		call patch#apply_hunks(a:buf, hunks)
+	endif
 endfunction
 
 function! patch#apply_hunks(buf, hunks)
@@ -96,20 +104,16 @@ function! patch#parse(diff, src)
 	return hunks
 endfunction
 
-function! s:err(msg, diff, lnum)
-	let n = a:lnum - 1
-	while n > 0 && a:diff[n][0] != '@'
-		let n -= 1
-	endwhile
-	let lnum = min([a:lnum + 2, len(a:diff)])
+function! patch#echo(diff, ...)
+	let lnum = get(a:, 1, 1) - 1
+	let lend = get(a:, 2, len(a:diff))
+	let lerr = get(a:, 3, -1)
+	while lnum < lend
+		let l = a:diff[lnum]
+		let lnum += 1
 
-	echohl Error | echo a:msg."\n\n" | echohl None
-	while n < lnum
-		let l = a:diff[n]
-		let n += 1
-
-		if n == a:lnum | echohl Error | else | echohl LineNr | endif
-		echon printf(" %3d ", n)
+		if lnum == lerr | echohl Error | else | echohl LineNr | endif
+		echon printf(" %3d ", lnum)
 
 		if l[0] == '@'
 			echohl DiffText | echon l | echohl None
@@ -122,9 +126,18 @@ function! s:err(msg, diff, lnum)
 		endif
 		echon "\n"
 	endwhile
+endfunction
+
+function! s:err(msg, diff, lnum)
+	let lnum = a:lnum
+	let lend = min([a:lnum + 2, len(a:diff)])
+	while lnum > 1 && a:diff[lnum-1][0] != '@'
+		let lnum -= 1
+	endwhile
+
+	echohl Error | echo a:msg."\n\n" | echohl None
+	patch#echo(a:diff, lnum, lend, a:lnum)
 	call confirm("Patch not applied")
 	return []
 endfunction
 
-command! -nargs=1 -complete=file Patch call patch#apply_file('%', <q-args>)
-command! -nargs=1 -complete=shellcmd PatchCmd call patch#apply_cmd('%', <q-args>)

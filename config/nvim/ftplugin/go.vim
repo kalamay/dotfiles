@@ -6,13 +6,13 @@ let b:did_ftplugin = 1
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
-command! -buffer GoFmt call GoFormat()
+command! -buffer -bang GoFmt call GoFormat("<bang>" == "")
 command! -buffer GoReferences lua vim.lsp.buf.references()
 command! -buffer GoRename lua vim.lsp.buf.rename()
 
-function! GoFormat()
+function! GoFormat(prompt)
 	let err = []
-	let out = patch#apply_cmd("%", "goimports -d")
+	let out = patch#apply_cmd("%", "goimports -d", a:prompt)
 
 	if len(out) > 0
 		let buf = bufnr('%')

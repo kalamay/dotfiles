@@ -39,7 +39,7 @@ cmd[[
 	autocmd BufWinEnter *.fish set filetype=fish
 	autocmd BufWinEnter *.go lua lsp:enable()
 	autocmd BufWinEnter *.c lua lsp:enable()
-	autocmd BufWritePre *.go GoFmt
+	autocmd BufWritePre *.go GoFmt!
 	autocmd WinEnter * set cul
 	autocmd WinLeave * set nocul
 ]]

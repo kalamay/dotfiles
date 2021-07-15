@@ -26,6 +26,11 @@ map("n", "<CR>", ":let @/=''<CR>", { silent = true })
 
 map("n", "<Leader>c", ':call syntax#show()<CR>')
 
-cmd('command! -nargs=+ -complete=highlight Hi call syntax#echo(<f-args>)')
+cmd[[
+	command! -nargs=+ -complete=highlight Hi call syntax#echo(<f-args>)
+	command! -nargs=1 -complete=file -bang Patch call patch#apply_file('%', <q-args>, "<bang>" == "")
+	command! -nargs=1 -complete=shellcmd -bang PatchCmd call patch#apply_cmd('%', <q-args>, "<bang>" == "")
 
-cmd("autocmd BufWinEnter * if &buftype == 'quickfix' | call quickfix#start() | endif")
+	autocmd BufWinEnter * if &buftype == 'quickfix' | call quickfix#start() | endif"
+]]
+
