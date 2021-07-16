@@ -17,7 +17,7 @@ for FILE in $(ls $DIR/bin); do
 	ln -sf "$DIR/bin/$FILE" "$HOME/opt/bin/$FILE"
 done
 
-HOME_FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .vim .vimrc .zsh .zshrc .gitignore_global"
+HOME_FILES=".editrc .hushlogin .inputrc .irbrc .tmux.conf .zsh .zshrc .gitignore_global"
 for FILE in $HOME_FILES; do
 	rm -f "$HOME/$FILE"
 	ln -s "$DIR/$FILE" "$HOME/$FILE"

@@ -1,0 +1,12 @@
+[submodule "config/vim/pack/sub/start/vinegar"]
+	path = config/vim/pack/sub/start/vinegar
+	url = https://github.com/tpope/vim-vinegar.git
+[submodule "config/vim/pack/sub/start/tmux-navigator"]
+	path = config/vim/pack/sub/start/tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "config/vim/pack/sub/start/undotree"]
+	path = config/vim/pack/sub/start/undotree
+	url = https://github.com/mbbill/undotree.git
+[submodule "config/vim/pack/sub/opt/lsp"]
+	path = config/vim/pack/sub/opt/lsp
+	url = https://github.com/yegappan/lsp.git
