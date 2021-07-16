@@ -4,7 +4,7 @@ local set_hl = vim.api.nvim_set_hl
 
 local nord = {
 	--+--- Polar Night ---+
-	"#2e3440", "#3b4252", "#434c5e", "#4c566a", "#616E88",
+	"#272b35", "#2e3440", "#3b4252", "#434c5e", "#4c566a", "#616E88",
 
 	--+--- Snow Storm ---+
 	"#d8dee9", "#e5e9f0", "#eceff4",
@@ -16,134 +16,134 @@ local nord = {
 	"#bf616a", "#d08770", "#ebcb8b", "#a3be8c", "#b48ead",
 
 	--+--- Editor ---+
-	ColorColumn         = {          bg = 1,  "NONE" },
-	Cursor              = { fg = 0,  bg = 5,  "NONE" },
+	ColorColumn         = {          bg = 2,  "NONE" },
+	Cursor              = { fg = 0,  bg = 6,  "NONE" },
 	CursorLine          = {          bg = 1,  "NONE" },
-	CursorLineNR        = { fg = 10, bg = 1,  "NONE" },
+	CursorLineNR        = { fg = 11, bg = 1,  "NONE" },
 	CursorColumn        = {          bg = 1,  "NONE" },
-	Error               = { fg = 5,  bg = 12, },
-	iCursor             = { fg = 0,  bg = 5,  },
-	LineNr              = { fg = 3,           },
-	MatchParen          = { fg = 9,  bg = 3,  },
-	NonText             = { fg = 2,           },
+	Error               = { fg = 6,  bg = 13, },
+	iCursor             = { fg = 0,  bg = 6,  },
+	LineNr              = { fg = 4,           },
+	MatchParen          = { fg = 10, bg = 4,  },
+	NonText             = { fg = 3,           },
 	Normal              = { fg = 7,  bg = 0,  },
-	Pmenu               = { fg = 5,  bg = 2,  "NONE" },
-	PmenuSbar           = { fg = 5,  bg = 2,  },
-	PmenuSel            = { fg = 9,  bg = 3,  },
-	PmenuThumb          = { fg = 9,  bg = 3,  },
-	SpecialKey          = { fg = 1,           },
-	NonText             = { fg = 1,           },
-	SpellBad            = { fg = 12, bg = 0,  "underline" },
-	SpellCap            = { fg = 14, bg = 0,  "underline" },
-	SpellLocal          = { fg = 6,  bg = 0,  "underline" },
-	SpellRare           = { fg = 7,  bg = 0,  "underline" },
-	Visual              = {          bg = 2,  },
-	VisualNOS           = {          bg = 2,  },
+	Pmenu               = { fg = 6,  bg = 3,  "NONE" },
+	PmenuSbar           = { fg = 6,  bg = 3,  },
+	PmenuSel            = { fg = 10, bg = 4,  },
+	PmenuThumb          = { fg = 10, bg = 4,  },
+	SpecialKey          = { fg = 2,           },
+	NonText             = { fg = 2,           },
+	SpellBad            = { fg = 13, bg = 0,  "underline" },
+	SpellCap            = { fg = 15, bg = 0,  "underline" },
+	SpellLocal          = { fg = 7,  bg = 0,  "underline" },
+	SpellRare           = { fg = 8,  bg = 0,  "underline" },
+	Visual              = {          bg = 3,  },
+	VisualNOS           = {          bg = 3,  },
 	Whitespace          = "NonText",
 
 	--+--- Navigation ---+
-	Directory           = { fg = 9,           },
+	Directory           = { fg = 10,          },
 
 	--+--- Prompt/Status ---+
-	EndOfBuffer         = { fg = 1,           },
-	ErrorMsg            = { fg = 5,  bg = 12, },
-	ModeMsg             = { fg = 5,           },
-	MoreMsg             = { fg = 9,           },
-	WarningMsg          = { fg = 0,  bg = 14, },
-	WildMenu            = { fg = 9,  bg = 1,  },
-	Question            = { fg = 5,           },
+	EndOfBuffer         = { fg = 2,           },
+	ErrorMsg            = { fg = 6,  bg = 13, },
+	ModeMsg             = { fg = 6,           },
+	MoreMsg             = { fg = 10,          },
+	WarningMsg          = { fg = 0,  bg = 15, },
+	WildMenu            = { fg = 10, bg = 2,  },
+	Question            = { fg = 6,           },
 	StatusLine          = { fg = 0,  bg = 0,  },
 	StatusLineNC        = { fg = 0,  bg = 0,  },
 	StatusLineTerm      = { fg = 0,  bg = 0,  },
 	StatusLineTermNC    = { fg = 0,  bg = 0,  },
-	StatusModeNormal    = { fg = 0,  bg = 10, "bold" },
-	StatusModeInsert    = { fg = 0,  bg = 15, "bold" },
-	StatusModeVisual    = { fg = 0,  bg = 16, "bold" },
-	StatusModeReplace   = { fg = 0,  bg = 12, "bold" },
-	StatusModeCommand   = { fg = 0,  bg = 14, "bold" },
+	StatusModeNormal    = { fg = 0,  bg = 11, "bold" },
+	StatusModeInsert    = { fg = 0,  bg = 16, "bold" },
+	StatusModeVisual    = { fg = 0,  bg = 17, "bold" },
+	StatusModeReplace   = { fg = 0,  bg = 13, "bold" },
+	StatusModeCommand   = { fg = 0,  bg = 15, "bold" },
 	StatusModeSelect    = "StatusModeVisual",
 	StatusModeTerm      = "StatusModeCommand",
-	StatusFile          = { fg = 5,  bg = 3,  },
-	StatusMeta          = { fg = 4,  bg = 1,  },
-	StatusScroll        = { fg = 10, bg = 3,  },
-	StatusModeNC        = { fg = 0,  bg = 3,  },
-	StatusFileNC        = { fg = 0,  bg = 2,  },
-	StatusMetaNC        = { fg = 0,  bg = 1,  },
-	StatusScrollNC      = { fg = 0,  bg = 2,  },
+	StatusFile          = { fg = 6,  bg = 4,  },
+	StatusMeta          = { fg = 5,  bg = 2,  },
+	StatusScroll        = { fg = 11, bg = 4,  },
+	StatusModeNC        = { fg = 0,  bg = 4,  },
+	StatusFileNC        = { fg = 0,  bg = 3,  },
+	StatusMetaNC        = { fg = 0,  bg = 2,  },
+	StatusScrollNC      = { fg = 0,  bg = 3,  },
 
 	--+--- Search ---+
-	IncSearch           = { fg = 1,  bg = 13, "underline" },
-	Search              = { fg = 1,  bg = 14, "NONE" },
-	QuickFixLine        = { fg = 1,  bg = 9,  "NONE" },
+	IncSearch           = { fg = 2,  bg = 14, "underline" },
+	Search              = { fg = 2,  bg = 15, "NONE" },
+	QuickFixLine        = { fg = 2,  bg = 10, "NONE" },
 
 	--"+--- Tabs ---+
-	TabLine             = { fg = 5,  bg = 1,  "NONE" },
-	TabLineFill         = { fg = 5,  bg = 1,  "NONE" },
-	TabLineSel          = { fg = 9,  bg = 3,  "NONE" },
+	TabLine             = { fg = 6,  bg = 2,  "NONE" },
+	TabLineFill         = { fg = 6,  bg = 2,  "NONE" },
+	TabLineSel          = { fg = 10, bg = 4,  "NONE" },
 
 	--+--- Window ---+
-	Title               = { fg = 5,           "NONE" },
-	VertSplit           = { fg = 2,  bg = 0,  "NONE" },
+	Title               = { fg = 6,           "NONE" },
+	VertSplit           = { fg = 3,  bg = 0,  "NONE" },
 
 	--+--- Language ---+
-	Boolean             = { fg = 10,          },
-	Character           = { fg = 15,          },
-	Comment             = { fg = 4,           "italic" },
-	Conditional         = { fg = 10,          },
-	Constant            = { fg = 16,          },
-	Define              = { fg = 10,          },
-	Delimiter           = { fg = 7,           },
-	Exception           = { fg = 10,          },
-	Float               = { fg = 16,          },
-	Function            = { fg = 9,           },
-	Identifier          = { fg = 5,           "NONE" },
-	Include             = { fg = 16,          "bold"},
-	Keyword             = { fg = 15,          "bold"},
-	Number              = { fg = 12,          },
-	Operator            = { fg = 10,          "NONE" },
-	PreProc             = { fg = 16,          "bold" },
-	Special             = { fg = 8,           },
-	SpecialChar         = { fg = 14,          },
-	SpecialComment      = { fg = 9,           "italic" },
-	Statement           = { fg = 10,          "bold" },
-	StorageClass        = { fg = 10,          },
-	String              = { fg = 15,          },
-	Structure           = { fg = 10,          },
-	Tag                 = { fg = 5,           },
-	Todo                = { fg = 0,  bg = 12, "bold" },
-	Type                = { fg = 10,          "NONE" },
-	Typedef             = { fg = 10,          },
+	Boolean             = { fg = 11,          },
+	Character           = { fg = 16,          },
+	Comment             = { fg = 5,           "italic" },
+	Conditional         = { fg = 11,          },
+	Constant            = { fg = 17,          },
+	Define              = { fg = 11,          },
+	Delimiter           = { fg = 8,           },
+	Exception           = { fg = 11,          },
+	Float               = { fg = 17,          },
+	Function            = { fg = 10,          },
+	Identifier          = { fg = 6,           "NONE" },
+	Include             = { fg = 17,          "bold"},
+	Keyword             = { fg = 15,          },
+	Number              = { fg = 13,          },
+	Operator            = { fg = 11,          "NONE" },
+	PreProc             = { fg = 17,          "bold" },
+	Special             = { fg = 9,           },
+	SpecialChar         = { fg = 15,          },
+	SpecialComment      = { fg = 10,          "italic" },
+	Statement           = { fg = 11,          "bold" },
+	StorageClass        = { fg = 11,          },
+	String              = { fg = 16,          },
+	Structure           = { fg = 11,          },
+	Tag                 = { fg = 6,           },
+	Todo                = { fg = 0,  bg = 13, "bold" },
+	Type                = { fg = 11,          "NONE" },
+	Typedef             = { fg = 11,          },
 	Label               = "Conditional",
 	Repeat              = "Conditional",
 	Macro               = "Define",
 	PreCondit           = "PreProc",
 
 	--+--- Diff ---+
-	DiffAdd             = { fg = 15, bg = 1,  },
-	DiffChange          = { fg = 14, bg = 1,  },
-	DiffDelete          = { fg = 12, bg = 1,  },
-	DiffText            = { fg = 10, bg = 1,  },
+	DiffAdd             = { fg = 16, bg = 2,  },
+	DiffChange          = { fg = 15, bg = 2,  },
+	DiffDelete          = { fg = 13, bg = 2,  },
+	DiffText            = { fg = 11, bg = 2,  },
 
 	--+--- Treesitter Overrides ---+
 	TSTypeBuiltin       = { fg = 16,          "NONE" },
 }
 
-g.terminal_color_0 = nord[1+1]
-g.terminal_color_1 = nord[1+11]
-g.terminal_color_2 = nord[1+14]
-g.terminal_color_3 = nord[1+13]
-g.terminal_color_4 = nord[1+9]
-g.terminal_color_5 = nord[1+15]
-g.terminal_color_6 = nord[1+8]
-g.terminal_color_7 = nord[1+5]
-g.terminal_color_8 = nord[1+3]
-g.terminal_color_9 = nord[1+11]
-g.terminal_color_10 = nord[1+14]
-g.terminal_color_11 = nord[1+13]
-g.terminal_color_12 = nord[1+9]
-g.terminal_color_13 = nord[1+15]
-g.terminal_color_14 = nord[1+7]
-g.terminal_color_15 = nord[1+6]
+g.terminal_color_0 = nord[1+2]
+g.terminal_color_1 = nord[1+12]
+g.terminal_color_2 = nord[1+15]
+g.terminal_color_3 = nord[1+14]
+g.terminal_color_4 = nord[1+10]
+g.terminal_color_5 = nord[1+16]
+g.terminal_color_6 = nord[1+9]
+g.terminal_color_7 = nord[1+6]
+g.terminal_color_8 = nord[1+4]
+g.terminal_color_9 = nord[1+12]
+g.terminal_color_10 = nord[1+15]
+g.terminal_color_11 = nord[1+14]
+g.terminal_color_12 = nord[1+10]
+g.terminal_color_13 = nord[1+16]
+g.terminal_color_14 = nord[1+8]
+g.terminal_color_15 = nord[1+7]
 
 local function render_hi(name, val, colors)
 	if type(val) == "string" then
