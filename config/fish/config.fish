@@ -3,6 +3,7 @@ set -x GOPRIVATE "github.com/segmentio"
 set -x ROBO_CONFIG $GOPATH/src/github.com/segmentio/robofiles/development/robo.yml
 set -x SEGMENT_TEAM platform
 set -x SEGMENT_USER jeremy.larkin@segment.com
+set -x VIMINIT "source $HOME/.config/vim/vimrc"
 set -x PATH \
 	$HOME/opt/bin \
 	$HOME/.cargo/bin \
