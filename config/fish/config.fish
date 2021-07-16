@@ -17,7 +17,7 @@ set -x PATH \
 
 set -x LSCOLORS GxFxCxDxBxegehxbxgxcxd
 set -x LS_COLORS 'di=01;36:ln=01;35:so=01;32:pi=01;33:ex=01;31:bd=34;46:cd=34;47:su=01;41:sg=01;46:tw=0;42:ow=0;43:'
-set -x EDITOR nvim
+set -x EDITOR vim
 
 function fish_prompt
 	# if the last command failed, print the status code
@@ -87,8 +87,6 @@ end
 alias y2j="ruby -ryaml -rjson -e 'YAML.load_stream(ARGF).each { |d| puts JSON.pretty_generate(d) }'"
 alias cc-defs="cc -dM -E -x c /dev/null"
 alias pls='git ls-files -co --exclude-standard ^/dev/null; or find . -type d -name "*.dSYM" -prune -o -type f -maxdepth 4 -print ^/dev/null'
-alias vim=nvim
-alias vi=nvim
 
 function lt
 	tree -C $argv | less -R
