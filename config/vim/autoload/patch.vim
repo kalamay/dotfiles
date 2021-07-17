@@ -37,7 +37,7 @@ export def patch#apply_hunks(bn: number, hunks: list<dict<any>>)
 		if n <= info.lnum
 			info.lnum += len(hunk.add) - hunk.rem
 		endif
-		if hunk.rem
+		if hunk.rem > 0
 			deletebufline(bn, n, n + hunk.rem - 1)
 		endif
 		if len(hunk.add) > 0
