@@ -1,65 +1,63 @@
 vim9script
 
-const s:fmt = '%%{%%g:StatuslineMode(%s)%%}%%#StatusFile%s# %%{g:StatuslineFile()}%%m %%#StatusMeta%s#%%=%%{g:StatuslineMeta()} %%#StatusScroll%s# %%l/%%L:%%02c %%0*'
+const s:fmt = '%%{%%%smode(v:%s)%%}%%#StatusFile%s# %%{%sfile()}%%m %%#StatusMeta%s#%%=%%{%smeta()} %%#StatusScroll%s# %%l/%%L:%%02c %%0*'
 
-def s:line(active: number): string
-	var typ = ""
+def s:genline(active: bool): string
+	const sid = expand('<SID>')
+	var cur = ""
 	if !active
-		typ = "NC"
+		cur = "NC"
 	endif
-	return printf(fmt, active, typ, typ, typ)
+	return printf(fmt, sid, active, cur, sid, cur, sid, cur)
 enddef
 
-def s:mode(name: string, color: string): list<string>
-	return [ printf('%%#StatusModeNC#%s', name), printf('%%#StatusMode%s#%s', color, name)]
+def s:genmode(name: string, color: string): dict<string>
+	return {
+		[true]: printf('%%#StatusMode%s#%s', color, name),
+		[false]: printf('%%#StatusModeNC#%s', name),
+	}
 enddef
 
 const s:modes = {
-			\ ['n']:  s:mode('  NORMAL  ', 'Normal' ),
-			\ ['i']:  s:mode('  INSERT  ', 'Insert' ),
-			\ ['R']:  s:mode(' REPLACE  ', 'Replace'),
-			\ ['v']:  s:mode('  VISUAL  ', 'Visual' ),
-			\ ['V']:  s:mode('  V-LINE  ', 'Visual' ),
-			\ ['']: s:mode(' V-BLOCK  ', 'Visual' ),
-			\ ['c']:  s:mode(' COMMAND  ', 'Command'),
-			\ ['s']:  s:mode('  SELECT  ', 'Select' ),
-			\ ['S']:  s:mode('  S-LINE  ', 'Select' ),
-			\ ['']: s:mode(' S-BLOCK  ', 'Select' ),
-			\ ['t']:  s:mode(' TERMINAL ', 'Term'   ),
+	['n']:  s:genmode('  NORMAL  ', 'Normal' ),
+	['i']:  s:genmode('  INSERT  ', 'Insert' ),
+	['R']:  s:genmode(' REPLACE  ', 'Replace'),
+	['v']:  s:genmode('  VISUAL  ', 'Visual' ),
+	['V']:  s:genmode('  V-LINE  ', 'Visual' ),
+	['']: s:genmode(' V-BLOCK  ', 'Visual' ),
+	['c']:  s:genmode(' COMMAND  ', 'Command'),
+	['s']:  s:genmode('  SELECT  ', 'Select' ),
+	['S']:  s:genmode('  S-LINE  ', 'Select' ),
+	['']: s:genmode(' S-BLOCK  ', 'Select' ),
+	['t']:  s:genmode(' TERMINAL ', 'Term'   ),
 }
 
-const s:fallback = s:mode('    ??    ', 'Normal')
+const s:fallback = s:genmode('    ??    ', 'Normal')
 
-const s:lines = [s:line(0), s:line(1)]
+const s:lines = {
+	[true]: s:genline(true),
+	[false]: s:genline(false),
+}
 
-def g:StatuslineUpdate()
+def s:update()
 	const winn = winnr()
 	const wine = winnr('$')
 	var i = 1
 	while i <= wine
-		if i == winn
-			setwinvar(i, '&statusline', s:lines[1])
-		else
-			setwinvar(i, '&statusline', s:lines[0])
-		endif
+		setwinvar(i, '&statusline', s:lines[i == winn])
 		i += 1
 	endwhile
 enddef
 
-def g:StatuslineMode(active: bool): string
-	const m = s:modes->get(mode(), s:fallback)
-	if active
-		return m[1]
-	else
-		return m[0]
-	endif
+def s:mode(active: bool): string
+	return s:modes->get(mode(), s:fallback)[active]
 enddef
 
-def g:StatuslineMeta(): string
-	return [&fileformat, &fileencoding, &filetype]->join("・")
+def s:meta(): string
+	return printf("%s・%s・%s", &fileformat, &fileencoding, &filetype)
 enddef
 
-def g:StatuslineFile(): string
+def s:file(): string
 	var out = expand('%:p')
 	if len(out) > 0
 		const cwd = getcwd() .. '/'
@@ -72,6 +70,6 @@ def g:StatuslineFile(): string
 	return out
 enddef
 
-au WinEnter,BufEnter,BufDelete,SessionLoadPost,FileChangedShellPost * call StatuslineUpdate()
+au WinEnter,BufEnter,BufDelete,SessionLoadPost,FileChangedShellPost * call <SID>update()
 
-StatuslineUpdate()
+s:update()
