@@ -11,7 +11,7 @@ nnoremap [l :lprevious<CR>
 
 nnoremap <Leader>u :UndotreeToggle<CR>
 
-nnoremap <c-]> :LspGotoDefinition<CR>
+nnoremap <c-]> :call lsp#goto()<CR>
 
 "nnoremap <C-P> :Telescope find_files<CR>
 "nnoremap <C-B> :Telescope buffers<CR>
