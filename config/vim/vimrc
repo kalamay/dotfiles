@@ -1,8 +1,8 @@
 let s:conf_dir = $HOME.'/.config/vim'
 let s:state_dir = $HOME.'/.local/share/vim'
-let s:undo_dir = s:state_dir.'/undo'
-let s:swap_dir = s:state_dir.'/swap'
-let s:backup_dir = s:state_dir.'/backup'
+let s:undo_dir = s:state_dir.'/undo//'
+let s:swap_dir = s:state_dir.'/swap//'
+let s:backup_dir = s:state_dir.'/backup//'
 
 if !isdirectory(s:swap_dir) | call mkdir(s:swap_dir, "p") | endif
 if !isdirectory(s:undo_dir) | call mkdir(s:undo_dir, "p") | endif
@@ -19,4 +19,4 @@ let g:netrw_home=s:state_dir
 runtime settings.vim
 runtime mappings.vim
 runtime statusline.vim
-" runtime lsp.vim
+"runtime lsp.vim
