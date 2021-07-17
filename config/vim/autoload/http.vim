@@ -11,6 +11,11 @@ const s:state_status = 0
 const s:state_header = 1
 const s:state_body = 2
 
+const s:mime_json = {
+	[false]: "application/json",
+	[true]: "application/vscode-jsonrpc",
+}
+
 export def http#debug(res: dict<any>)
 	if res->has_key('error')
 		echohl Error | echom res.error | echohl None
@@ -31,10 +36,6 @@ enddef
 
 export def http#post(ch: channel, url: string, body: any, response: func(dict<any>))
 	http#request(ch, { url: url, method: 'POST', body: body, response: response })
-enddef
-
-export def http#lsp(ch: channel, body: any, response: func(dict<any>))
-	http#request(ch, { lsp: true, body: body, response: response })
 enddef
 
 export def http#request(ch: channel, req: dict<any> = {})
@@ -62,20 +63,21 @@ export def http#request(ch: channel, req: dict<any> = {})
 enddef
 
 export def http#send(ch: channel, req: dict<any> = {})
+	const lsp = req->get('lsp', false)
 	var body = req->get('body', '')
 	var hdr = req->get('header', {})
 
 	var ct = "text/plain"
 	if type(body) != v:t_string
 		body = body->json_encode()
-		ct = "application/json"
+		ct = s:mime_json[lsp]
 	endif
 
 	hdr['Content-Type'] = hdr->get('Content-Type', ct)
 	hdr['Content-Length'] = len(body)
 
 	var head = ''
-	if !req->get('lsp', false)
+	if !lsp
 		const method = req->get('method', 'GET')
 		const url = req->get('url', '/')
 		head = printf(s:start, method, url)
@@ -108,9 +110,9 @@ export def http#recv(ch: channel, recv: dict<any>, msg: string): list<dict<any>>
 		data = recv.data .. data
 	endif
 
-	var resp = s:response_of(recv)
+	while len(data) > 0
+		var resp = s:response_of(recv)
 
-	while true
 		if recv.state < s:state_body
 			const idx = data->stridx(s:nl)
 			if idx < 0
@@ -134,7 +136,7 @@ export def http#recv(ch: channel, recv: dict<any>, msg: string): list<dict<any>>
 			endif
 		elseif len(data) >= resp.length
 			resp.body = data[0 : resp.length - 1]
-			data = data[resp.length + 1 : -1]
+			data = data[resp.length : -1]
 
 			if s:decode_json(recv, resp)
 				resp.body = resp.body->json_decode()
@@ -143,7 +145,6 @@ export def http#recv(ch: channel, recv: dict<any>, msg: string): list<dict<any>>
 			recv.state = recv.init
 
 			out->add(recv->remove('response'))
-			resp = s:response_of(recv)
 		else
 			break
 		endif
