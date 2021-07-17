@@ -19,4 +19,4 @@ let g:netrw_home=s:state_dir
 runtime settings.vim
 runtime mappings.vim
 runtime statusline.vim
-runtime lsp.vim
+" runtime lsp.vim
