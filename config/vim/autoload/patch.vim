@@ -24,18 +24,21 @@ export def patch#apply(bn: number, diff: list<string>, src: list<string>, prompt
 				return []
 			endif
 		endif
-		patch#apply_hunks(bn, hunks)
+		final info = winsaveview()
+		info.lnum = patch#apply_hunks(bn, hunks)
+		if bn == bufnr()
+			winrestview(info)
+		endif
 	endif
 	return []
 enddef
 
-export def patch#apply_hunks(bn: number, hunks: list<dict<any>>)
-	final info = winsaveview()
-
+export def patch#apply_hunks(bn: number, hunks: list<dict<any>>): number
+	var lnum = getbufinfo(bn)[0].lnum
 	for hunk in hunks
 		const n = hunk.lnum
-		if n <= info.lnum
-			info.lnum += len(hunk.add) - hunk.rem
+		if n <= lnum
+			lnum += len(hunk.add) - hunk.rem
 		endif
 		if hunk.rem > 0
 			deletebufline(bn, n, n + hunk.rem - 1)
@@ -44,10 +47,7 @@ export def patch#apply_hunks(bn: number, hunks: list<dict<any>>)
 			appendbufline(bn, n - 1, hunk.add)
 		endif
 	endfor
-
-	if bn == bufnr()
-		winrestview(info)
-	endif
+	return lnum
 enddef
 
 const HUNK = '\v^\@\@\s*-(\d+)%[,(\d+)]\s*\+(\d+)%[,(\d+)]\s*\@\@'
