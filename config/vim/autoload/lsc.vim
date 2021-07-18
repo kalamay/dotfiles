@@ -136,48 +136,32 @@ export def lsc#respond_error(srv: dict<any>, req: dict<any>, error: dict<any>)
 	lsc#send(srv, msg)
 enddef
 
-export def lsc#goto(srv: dict<any>, what: string = 'definition'): bool
+export def lsc#goto(srv: dict<any>, opts: dict<any>): bool
+	const what = opts->get('what', 'definition')
 	if !srv.capabilities->get(what .. 'Provider', v:false)
 		return false
 	endif
 
-	const where = getcharpos('.')
 	const msg = s:create_request(srv, "textDocument/" .. what, {
-		textDocument: { uri: s:uri_of(bufname('%')) },
-		position: { line: where[1] - 1, character: where[2] - 1 }
+		textDocument: { uri: s:uri_of(bufname(opts.bufnr)) },
+		position: { line: opts.lnum - 1, character: opts.col - 1 }
 	})
 
-	lsc#send(srv, msg, function('s:goto_done', [where]))
+	lsc#send(srv, msg, function('s:goto_done', [opts]))
 
 	return true
 enddef
 
-def s:goto_done(where: list<number>, srv: dict<any>, msg: dict<any>)
-	if len(msg.result) == 0 || where != getcharpos('.')
-		return
-	endif
-
-	const result = msg.result[0]
-	const lnum = result.range.start.line + 1
-	const col  = result.range.start.character + 1
-	const path = result.uri[len(s:uri_prefix) : -1]
-	const cwd = getcwd() .. '/'
-
-	var cmd = "edit"
-	if path[0 : len(cwd) - 1] != cwd
-		cmd = "view"
-	endif
-
-  settagstack(winnr(), {
-		items: [{
-			bufnr: where[0],
-			from: where[1 : 2],
-			matchnr: 1,
-			tagname: expand('<cword>'),
-		}]
-	}, 't')
-
-	exe printf("%s +call\\ setcursorcharpos(%d,\\ %d) %s", cmd, lnum, col, path)
+def s:goto_done(opts: dict<any>, srv: dict<any>, msg: dict<any>)
+	var result = []
+	for r in msg.result
+		result->add({
+			lnum: r.range.start.line + 1,
+			col: r.range.start.character + 1,
+			path: r.uri[len(s:uri_prefix) : -1],
+		})
+	endfor
+	opts.callback(opts, result)
 enddef
 
 def s:pump(srv: dict<any>, ch: channel, recv: dict<any>, data: string)
